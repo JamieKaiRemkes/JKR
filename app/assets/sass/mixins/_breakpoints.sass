@@ -1,0 +1,41 @@
+$padding-x: 1.5rem !default
+$padding-y: 2rem !default
+
+$breakpoint-sm: 620px !default
+$breakpoint-md: 960px !default
+$breakpoint-lg: 2000px !default
+
+$max-width: $breakpoint-md !default
+
+=xs
+  @media (max-width: $breakpoint-sm)
+    @content
+=sm
+  @media (max-width: $breakpoint-md)
+    @content
+=md
+  @media (min-width: $breakpoint-md)
+    @content
+=lg
+  @media (min-width: $breakpoint-lg)
+    @content
+
+=contain
+  width: 100%
+  max-width: $max-width
+  margin-left: auto
+  margin-right: auto
+
+=padx
+  padding-left: $padding-x
+  padding-right: $padding-x
+
+=pady
+  padding-top: $padding-y
+  padding-bottom: $padding-y
+
+=pad
+  padding-left: $padding-x
+  padding-right: $padding-x
+  padding-top: $padding-y
+  padding-bottom: $padding-y

@@ -1,0 +1,13 @@
+// Default page transition
+.page-enter-active, .page-leave-active
+  transition: all calc(var(--animation-speed) * 0.5) var(--animation-curve) !important
+  opacity: 1
+  transform: translateY(0rem)
+
+.page-enter
+  opacity: 0 !important
+  transform: translateY(-2rem) !important
+.page-leave-to
+  opacity: 0 !important
+  transform: translateY(2rem) !important
+
