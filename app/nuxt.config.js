@@ -1,4 +1,10 @@
 export default {
+  // Server settings
+  server: {
+    host: '0.0.0.0',
+    port: 8080
+  },
+
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -52,8 +58,31 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://www.npmjs.com/package/@nuxtjs/style-resources
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    // Add i18n
+    'nuxt-i18n'
   ],
+
+  // Configure i18n
+  i18n: {
+    locales: ['en', 'nl'],
+    defaultLocale: 'en',
+    strategy: 'prefix',
+    vueI18n: {
+      fallbackLocale: 'en',
+    },
+    vueI18nLoader: true,
+    detectBrowserLanguage: {
+      alwaysRedirect: false,
+      fallbackLocale: 'en',
+      onlyOnRoot: true,
+      useCookie: true,
+      cookieCrossOrigin: false,
+      cookieDomain: null,
+      cookieKey: 'locale',
+      cookieSecure: true
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

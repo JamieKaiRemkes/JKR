@@ -1,16 +1,30 @@
+<i18n lang="yaml">
+en:
+  welcome_msg: 'Welcome to my site!'
+nl:
+  welcome_msg: 'Welkom op mijn site!'
+</i18n>
+
 <template lang="pug">
   .container
-    h1 Welcome to this website
-    h2 Welcome to this website
-    h3 Welcome to this website
-    h4 Welcome to this website
-    h5 Welcome to this website
-    h6 Welcome to this website
-    p Welcome to this website
+    h1 {{ $t('welcome_msg') }}
+    h2 {{ $t('welcome_msg') }}
+    h3 {{ $t('welcome_msg') }}
+    h4 {{ $t('welcome_msg') }}
+    h5 {{ $t('welcome_msg') }}
+    h6 {{ $t('welcome_msg') }}
+    p {{ $t('welcome_msg') }}
 </template>
 
 <script>
-export default {}
+export default {
+  nuxtI18n: {
+    paths: {
+      en: '',
+      nl: ''
+    }
+  }
+}
 </script>
 
 <style lang="sass" scoped>
