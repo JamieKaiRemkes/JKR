@@ -8,6 +8,11 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  // Router config
+  router: {
+    trailingSlash: false
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -65,12 +70,20 @@ export default {
 
   // Configure i18n
   i18n: {
-    locales: ['en', 'nl'],
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US'
+      },
+      {
+        code: 'nl',
+        iso: 'nl-NL'
+      }
+    ],
     defaultLocale: 'en',
     strategy: 'prefix',
-    vueI18n: {
-      fallbackLocale: 'en',
-    },
+    seo: true,
+    baseUrl: () => window.location.origin,
     vueI18nLoader: true,
     detectBrowserLanguage: {
       alwaysRedirect: false,
@@ -90,7 +103,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: ''
     }
   },
 
