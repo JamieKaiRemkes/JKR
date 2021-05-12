@@ -1,0 +1,27 @@
+h1, h2, h3, h4, h5, h6
+  font-family: var(--font-family)
+  font-weight: var(--font-weight-bold)
+  margin:0
+
+p, a, span
+  font-family: var(--font-family)
+  font-weight: var(--font-weight)
+  margin:0
+
+// Font sizes using fibonacci sequence
+$factor: 1.618033988749895
+
+h1
+  font-size: calc(var(--font-size-base) * #{$factor} * 5)
+h2
+  font-size: calc(var(--font-size-base) * #{$factor} * 4)
+h3
+  font-size: calc(var(--font-size-base) * #{$factor} * 3)
+h4
+  font-size: calc(var(--font-size-base) * #{$factor} * 2)
+h5
+  font-size: calc(var(--font-size-base) * #{$factor} * 1)
+h6
+  font-size: calc(var(--font-size-base))
+p
+  font-size: calc(var(--font-size-base))
