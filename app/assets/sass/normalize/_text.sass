@@ -8,19 +8,16 @@ p, a, span
   font-weight: var(--font-weight)
   margin:0
 
-// Font sizes using fibonacci sequence
-$factor: 1.618033988749895
-
 h1
-  font-size: calc(var(--font-size-base) * #{$factor} * 5)
+  font-size: calc(var(--font-size-base) * var(--font-size-factor) * 5)
 h2
-  font-size: calc(var(--font-size-base) * #{$factor} * 4)
+  font-size: calc(var(--font-size-base) * var(--font-size-factor) * 4)
 h3
-  font-size: calc(var(--font-size-base) * #{$factor} * 3)
+  font-size: calc(var(--font-size-base) * var(--font-size-factor) * 3)
 h4
-  font-size: calc(var(--font-size-base) * #{$factor} * 2)
+  font-size: calc(var(--font-size-base) * var(--font-size-factor) * 2)
 h5
-  font-size: calc(var(--font-size-base) * #{$factor} * 1)
+  font-size: calc(var(--font-size-base) * var(--font-size-factor) * 1)
 h6
   font-size: calc(var(--font-size-base))
 p
