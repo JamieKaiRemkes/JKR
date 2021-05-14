@@ -1,14 +1,20 @@
 // External fonts
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap")
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap')
 
 :root
-  --font-family: 'Lato', sans-serif
+  // Fonts
+  --font-family: 'Roboto', sans-serif
   --font-size-base: 0.95rem
-  --font-weight: 400
-  --font-weight-bold: 900
+  --font-weight: 300
+  --font-weight-bold: 700
+  // Font sizes using fibonacci sequence on desktop
+  --font-size-factor: 1.2
+  +sm
+    --font-size-factor: 1.02
 
-  --color-primary: #1B9AA3
-  --color-secondary: #F5CB5C
+  // Colors
+  --color-primary: #0AFF91
+  --color-secondary: #00B4D8
 
   --color-light: #fcfcfc
   --color-light-secondary: #eeeeee
@@ -19,9 +25,13 @@
 
   --color-disabled: #7e7e7e
 
+  // Icons
   --icon-size: 1.4rem
 
+  // Animations
   --animation-speed: 0.15s
   --animation-curve: ease
 
-  --ui-margin-sides: 1.5rem
+  // Spacing
+  --ui-margin-x: 1.5rem
+  --ui-margin-y: 1.2rem
