@@ -25,7 +25,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
     ]
   },
 
@@ -105,7 +105,20 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: ''
+      name: 'J.K.R.',
+      short_name: 'J.K.R.',
+      theme_color: '#ffffff',
+      // Lang is set by i18n
+      lang: '',
+      start_url: '/',
+      display: 'standalone',
+      orientation: 'portrait',
+      icon: {
+        source: '@/static/maskable_icon.png',
+        sizes: [64, 120, 144, 152, 192, 384, 512],
+        type: 'image/png',
+        purpose: 'maskable'
+      }
     }
   },
 
