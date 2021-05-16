@@ -13,6 +13,17 @@ export default {
     trailingSlash: false
   },
 
+  // Router transitions
+  pageTransition: {
+    name: 'page',
+    mode: 'out-in'
+  },
+
+  layoutTransition: {
+    name: 'layout',
+    mode: 'out-in'
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -45,6 +56,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/i18nTransitionFix'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -96,7 +108,9 @@ export default {
       cookieDomain: null,
       cookieKey: 'locale',
       cookieSecure: true
-    }
+    },
+    // To fix jumping pages on locale change
+    skipSettingLocaleOnNavigate: true,
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

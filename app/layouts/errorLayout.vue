@@ -1,7 +1,6 @@
 <template lang="pug">
   #__page
     Header
-      LangSwitcher.lang
     Nuxt.content
     Socials
 </template>
@@ -9,13 +8,11 @@
 <script>
 import Header from '~/components/Header.vue'
 import Socials from '~/components/Socials.vue'
-import LangSwitcher from '~/components/LangSwitcher.vue'
 
 export default {
   components: {
     Header,
-    Socials,
-    LangSwitcher
+    Socials
   }
 }
 </script>

@@ -20,18 +20,17 @@ nl:
           NuxtLink(:to='localePath(item.pathName)')
             h6 {{$t(item.pathTitle)}}
     Burger.burger(name='menu' :menuOpen='mobileMenuOpen' @click.native='mobileMenuOpen = !mobileMenuOpen')
-    LangSwitcher.lang
+    .slot(v-if='hasSlot')
+      slot
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-import LangSwitcher from '~/components/LangSwitcher.vue'
 import Burger from '~/components/Burger.vue'
 
 export default {
   components: {
     Logo,
-    LangSwitcher,
     Burger
   },
   data () {
@@ -43,18 +42,23 @@ export default {
         },
         {
           pathTitle: 'page_name_timeline',
-          pathName: 'timeline'
+          pathName: '/timeline'
         },
         {
           pathTitle: 'page_name_project',
-          pathName: 'projects'
+          pathName: '/projects'
         },
         {
           pathTitle: 'page_name_contact',
-          pathName: 'contact'
+          pathName: '/contact'
         }
       ],
       mobileMenuOpen: false
+    }
+  },
+  computed: {
+    hasSlot () {
+      return !!this.$slots.default || !!this.$scopedSlots.default
     }
   }
 }
@@ -69,22 +73,26 @@ export default {
     bottom: 0
     display: grid
     grid-auto-flow: column
-    grid-template-areas: 'logo . nav lang'
+    grid-template-areas: 'logo . nav slot'
     grid-template-columns: auto 1fr auto auto
     padding: var(--ui-margin-y) var(--ui-margin-x)
     transition: all var(--animation-speed) var(--animation-curve)
     z-index: 100
+    +contain
     +sm
-      grid-template-areas: 'logo . nav burger lang'
+      grid-template-areas: 'logo . nav burger slot'
       grid-template-columns: auto 1fr auto auto auto
     .logo
       grid-area: logo
       height: var(--icon-size)
+      width: var(--icon-size)
       margin-right: var(--ui-margin-x)
       transition: all var(--animation-speed) var(--animation-curve)
+      +animate(slide-in-down)
       +sm
         &.hide
-          height: 0
+          width: 0
+          opacity: 0
           margin-right: 0
     nav
       grid-area: nav
@@ -94,6 +102,7 @@ export default {
       width: 100%
       overflow: auto
       transition: all var(--animation-speed) var(--animation-curve)
+      +animate(slide-in-left, 1)
       +sm
         &.hide
           width: 0
@@ -118,9 +127,11 @@ export default {
       align-self: center
       display: none
       margin-left: var(--ui-margin-x)
+      +animate(slide-in-left, 2)
       +sm
         display: block
-    .lang
-      grid-area: lang
+    .slot
+      grid-area: slot
       margin-left: var(--ui-margin-x)
+      +animate(slide-in-left, 3)
 </style>
