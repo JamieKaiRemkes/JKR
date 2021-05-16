@@ -91,6 +91,7 @@ export default {
       +sm
         &.hide
           width: 0
+          opacity: 0
           margin-right: 0
     nav
       grid-area: nav
