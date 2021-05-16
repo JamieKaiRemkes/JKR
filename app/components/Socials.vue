@@ -31,6 +31,7 @@ export default {
     grid-auto-flow: row
     grid-gap: 1rem
     margin-left: var(--ui-margin-x)
+    +animate(slide-in-up, 2)
     a
       flex: 0 0
     .icon

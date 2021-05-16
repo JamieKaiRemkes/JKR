@@ -1,33 +1,53 @@
 <i18n lang="yaml">
 en:
-  title: "Hi, I'm Jamie Kai Remkes!"
-  subtitle: "A nerd, film enthusiast and all-round creative."
+  error_message_not_found: "Whoops, this page doesn't seems to exist."
+  error_message_unknown: "Whoops, something must have gone wrong."
+  subtitle: "Please accept my apologies in the form of a cat video..."
 nl:
-  title: "Hi, ik ben Jamie Kai Remkes!"
-  subtitle: "Een nerd, film liefhebber en all-round creativeling."
+  error_message_not_found: "Oeps, deze pagina lijkt niet te bestaan."
+  error_message_unknown: "Oeps, er is iets fout gegaan."
+  subtitle: "Mijn exuses in de vorm van een katten video..."
 </i18n>
 
 <template lang="pug">
-  .home
+  .error
     .container
-      h2.title {{ $t('title') }}
+      h2.title {{ $t(title) }}
       h4.subtitle {{ $t('subtitle') }}
-      .img(:style="{ 'background-image': 'url(' + require('~/assets/images/backgrounds/home.png') + ')' }")
+      .img(:style="{ 'background-image': 'url(' + require('~/assets/images/backgrounds/error.png') + ')' }")
 </template>
 
 <script>
 export default {
+  layout: 'errorLayout',
+  props: {
+    error: {
+      type: Object,
+      required: false,
+      default: Object
+    }
+  },
+  head () {
+    return {
+      title: this.$t(this.title)
+    }
+  },
   nuxtI18n: {
     paths: {
-      en: '',
-      nl: ''
+      en: 'whoops',
+      nl: 'oeps'
+    }
+  },
+  computed: {
+    title () {
+      return this.error.statusCode === 404 ? 'error_message_not_found' : 'error_message_unknown'
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-  .home
+  .error
     flex: 1 1 auto !important
     position: relative
     display: flex

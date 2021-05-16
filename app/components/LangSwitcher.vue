@@ -1,6 +1,7 @@
 <template lang="pug">
   .switcher
-    Icon(v-for='(locale, i) in locales' :key='i' :name='`flags/${locale.code}`' :class='{active: !!(currentLocale == locale.code)}' @click.native='$i18n.setLocale(locale.code)' :style='{transform: translateY(i)}')
+    NuxtLink(v-for='(locale, i) in locales' :key='i' :to='switchLocalePath(locale.code)')
+      Icon(:name='`flags/${locale.code}`' :class='{active: !!(currentLocale == locale.code)}' :style='{transform: translateY(i)}')
 </template>
 
 <script>
@@ -48,12 +49,14 @@ export default {
     .icon
       position: relative
       display: block
-      transition: transform var(--animation-speed) var(--animation-curve)
+      transition: all var(--animation-speed) var(--animation-curve)
       // to get rid off small edges while overlapping
-      border: solid 1px var(--color-light)
+      border: solid 0.05rem var(--color-light)
       border-radius: 100%
       &.active
         z-index: 10
+        &:hover
+          +shadow(1)
       // Add an after element to make hover work inbetween icons
       &::after
         content: ''
