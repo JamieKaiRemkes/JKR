@@ -84,12 +84,13 @@ export default {
     .logo
       grid-area: logo
       height: var(--icon-size)
+      width: var(--icon-size)
       margin-right: var(--ui-margin-x)
       transition: all var(--animation-speed) var(--animation-curve)
       +animate(slide-in-down)
       +sm
         &.hide
-          height: 0
+          width: 0
           margin-right: 0
     nav
       grid-area: nav
