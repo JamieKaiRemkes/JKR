@@ -20,7 +20,7 @@ nl:
           NuxtLink(:to='localePath(item.pathName)')
             h6 {{$t(item.pathTitle)}}
     Burger.burger(name='menu' :menuOpen='mobileMenuOpen' @click.native='mobileMenuOpen = !mobileMenuOpen')
-    .slot(v-if='slot')
+    .slot(v-if='hasSlot')
       slot
 </template>
 
@@ -54,6 +54,11 @@ export default {
         }
       ],
       mobileMenuOpen: false
+    }
+  },
+  computed: {
+    hasSlot () {
+      return !!this.$slots.default || !!this.$scopedSlots.default
     }
   }
 }
