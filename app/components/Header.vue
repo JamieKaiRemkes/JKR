@@ -78,6 +78,7 @@ export default {
     padding: var(--ui-margin-y) var(--ui-margin-x)
     transition: all var(--animation-speed) var(--animation-curve)
     z-index: 100
+    +contain
     +sm
       grid-template-areas: 'logo . nav burger slot'
       grid-template-columns: auto 1fr auto auto auto

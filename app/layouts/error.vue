@@ -2,11 +2,11 @@
 en:
   error_message_not_found: "Whoops, this page doesn't seems to exist."
   error_message_unknown: "Whoops, something must have gone wrong."
-  subtitle: "Please accept my apologies in the form of a cat video..."
+  subtitle: "We're experiencing some technical difficulties..."
 nl:
   error_message_not_found: "Oeps, deze pagina lijkt niet te bestaan."
   error_message_unknown: "Oeps, er is iets fout gegaan."
-  subtitle: "Mijn exuses in de vorm van een katten video..."
+  subtitle: "We ervaren momenteel wat technische ongemakken..."
 </i18n>
 
 <template lang="pug">
