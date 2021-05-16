@@ -121,7 +121,6 @@ export default {
       grid-auto-flow: column
       grid-template-columns: repeat(auto-fit, minmax(auto, calc( 100vw - var(--ui-margin-x) * 2 )))
       grid-gap: var(--ui-margin-y) var(--ui-margin-x)
-      padding: 0 0 var(--ui-margin-y) 0
       // Scroll behavior and snapping
       overflow-x: auto
       overflow-y: hidden
@@ -132,12 +131,14 @@ export default {
         content: ''
         width: 1px
       .start
+        display: grid
         scroll-snap-align: none start
         padding-left: var(--ui-margin-x)
       .moment
         position: relative
         display: flex
         flex-direction: column
+        padding: 0 0 var(--ui-margin-y) 0
         +animate(slide-in-left, 3)
         // Align scroll snapping
         scroll-snap-align: none center

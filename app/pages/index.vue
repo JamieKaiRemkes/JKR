@@ -40,13 +40,14 @@ export default {
       position: relative
       flex: 1 0
       display: grid
-      grid-template-areas: 'title img' 'subtitle img' '. img '
+      grid-template-areas: 'title img' 'subtitle img' 'socials img '
       grid-auto-columns: minmax(10rem, 1fr) 1.6fr
       grid-auto-rows: auto auto minmax(10rem, 1fr)
       +padx
       +contain
       +xs
-        grid-template-areas: 'title' 'subtitle' 'img'
+        grid-template-areas: 'title title' 'subtitle subtitle' 'socials img'
+        grid-auto-columns: auto 1fr
       .title
         grid-area: title
         +animate(slide-in-right, 2)
@@ -61,4 +62,6 @@ export default {
         +animate(slide-in-up, 4)
         // Set some padding for the backgound image
         margin: var(--ui-margin-y) var(--ui-margin-x) 0 var(--ui-margin-y)
+      .socials
+        grid-area: socials
 </style>

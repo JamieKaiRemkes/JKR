@@ -25,12 +25,13 @@ export default {
 
 <style lang="sass" scoped>
     .socials
-      position: absolute
-      bottom: calc(-1 * var(--ui-margin-y))
+      position: relative
+      align-self: end
+      justify-content: left
       display: grid
       grid-auto-flow: row
       grid-gap: 1rem
-      padding-left: var(--ui-margin-x)
+      padding-top: var(--ui-margin-y)
       overflow: visible
       +animate(slide-in-up, 2)
       a
@@ -39,7 +40,7 @@ export default {
         justify-self: center
         color: var(--color-dark)
       .line
-        height: calc(5rem + var(--ui-margin-y))
+        height: 5rem
         width: 0.2rem
         background: var(--color-dark)
         align-self: center
