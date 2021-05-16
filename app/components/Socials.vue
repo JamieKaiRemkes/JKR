@@ -1,11 +1,10 @@
 <template lang="pug">
-  .container
-    .socials
-      a(:href='githubLink' target='new')
-        Icon(name='socials/github')
-      a(:href='linkedinLink' target='new')
-        Icon(name='socials/linkedin')
-      .line
+  .socials
+    a(:href='githubLink' target='new')
+      Icon(name='socials/github')
+    a(:href='linkedinLink' target='new')
+      Icon(name='socials/linkedin')
+    .line
 </template>
 
 <script>
@@ -25,15 +24,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  .container
-    +contain
     .socials
-      position: fixed
-      bottom: 0
+      position: absolute
+      bottom: calc(-1 * var(--ui-margin-y))
       display: grid
       grid-auto-flow: row
       grid-gap: 1rem
       padding-left: var(--ui-margin-x)
+      overflow: visible
       +animate(slide-in-up, 2)
       a
         flex: 0 0
@@ -41,7 +39,7 @@ export default {
         justify-self: center
         color: var(--color-dark)
       .line
-        height: 5rem
+        height: calc(5rem + var(--ui-margin-y))
         width: 0.2rem
         background: var(--color-dark)
         align-self: center

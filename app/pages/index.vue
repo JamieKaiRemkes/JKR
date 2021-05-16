@@ -13,15 +13,20 @@ nl:
       h2.title {{ $t('title') }}
       h4.subtitle {{ $t('subtitle') }}
       .img(:style="{ 'background-image': 'url(' + require('~/assets/images/backgrounds/home.png') + ')' }")
+      Socials
 </template>
 
 <script>
+import Socials from '~/components/Socials'
 export default {
   nuxtI18n: {
     paths: {
       en: '',
       nl: ''
     }
+  },
+  components: {
+    Socials
   }
 }
 </script>
