@@ -42,7 +42,7 @@ export default {
         },
         {
           pathTitle: 'page_name_timeline',
-          pathName: '/timeline'
+          pathName: 'timeline'
         },
         {
           pathTitle: 'page_name_project',
