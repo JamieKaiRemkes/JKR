@@ -41,7 +41,7 @@ export default {
       flex: 1 0
       display: grid
       grid-template-areas: 'title img' 'subtitle img' 'socials img '
-      grid-auto-columns: minmax(10rem, 1fr) 1.6fr
+      grid-auto-columns: minmax(10rem, 1fr) 1fr
       grid-auto-rows: auto auto minmax(10rem, 1fr)
       +padx
       +contain
