@@ -1,6 +1,7 @@
 <i18n lang="yaml">
 en:
   page_title: "See how time passed from my perspective."
+  page_intro: "It's not easy to get to know someone in a small amount of time. Let alone if you are just reading about them. For me, the best way to get to know someone new is to go for a walk together. So let's walk, talk and I'll tell you about some of my best moments."
   moments_title_birth: "My birth."
   moments_title_crazy: "First time some crazy shinned through."
   moments_title_pirate: "The time I wanted to be a pirate."
@@ -21,6 +22,7 @@ en:
     .moments
       .start
         h3.title {{ $t('page_title') }}
+        p.intro {{ $t('page_intro') }}
         Socials
       .moment(v-for='(moment, i) in moments')
         h5.title {{ $t(moment.title) }}
@@ -144,10 +146,6 @@ export default {
 <style lang="sass" scoped>
   .timeline
     display: grid
-    .start
-      position: relative
-      .title
-        +animate(slide-in-left, 2)
     .moments
       display: grid
       grid-auto-flow: column
@@ -165,14 +163,20 @@ export default {
         width: 1px
       .start
         display: grid
+        grid-template-rows: auto auto 1fr
+        grid-gap: var(--ui-margin-y)
         scroll-snap-align: none start
         padding-left: var(--ui-margin-x)
+        .title
+          +animate(slide-in-left, 2)
+        .intro
+          +animate(slide-in-left, 3)
       .moment
         position: relative
         display: flex
         flex-direction: column
         padding: 0 0 var(--ui-margin-y) 0
-        +animate(slide-in-left, 3)
+        +animate(slide-in-left, 4)
         margin: var(--ui-margin-y) var(--ui-margin-x)
         // Align scroll snapping
         scroll-snap-align: none center
