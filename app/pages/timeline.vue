@@ -195,6 +195,7 @@ export default {
           left: 50%
           height: 100vh
           width: 0.2rem
+          border-radius: 0.2rem
           background: var(--color-dark)
           z-index: -1
         // Animate on viewport entry
@@ -222,6 +223,7 @@ export default {
             max-width: 100%
             height: auto
             max-height: 100%
+            border-radius: 0.4rem
         .date
           white-space: nowrap
           +animate(slide-out-up)

@@ -42,6 +42,7 @@ export default {
       .line
         height: 5rem
         width: 0.2rem
+        border-radius: 0.2rem 0.2rem 0 0
         background: var(--color-dark)
         align-self: center
         justify-self: center
