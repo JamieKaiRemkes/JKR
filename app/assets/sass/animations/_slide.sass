@@ -1,25 +1,25 @@
 
   @keyframes slide-in-up
     0%
-      transform: translateY(100%)
+      transform: translateY(calc(100% + 1rem))
     100%
       transform: translateY(0%)
 
   @keyframes slide-in-left
     0%
-      transform: translateX(100%)
+      transform: translateX(calc(100% + 1rem))
     100%
       transform: translateX(0%)
 
   @keyframes slide-in-right
     0%
-      transform: translateX(-100%)
+      transform: translateX(calc(-100% - 1rem))
     100%
       transform: translateX(0%)
 
   @keyframes slide-in-down
     0%
-      transform: translateY(-100%)
+      transform: translateY(calc(-100% - 1rem))
     100%
       transform: translateY(0%)
 
@@ -28,22 +28,22 @@
     0%
       transform: translateY(0%)
     100%
-      transform: translateY(-100%)
+      transform: translateY(calc(-100% - 1rem))
 
   @keyframes slide-out-left
     0%
       transform: translateX(0%)
     100%
-      transform: translateX(-100%)
+      transform: translateX(calc(-100% - 1rem))
 
   @keyframes slide-out-right
     0%
       transform: translateX(0%)
     100%
-      transform: translateX(100%)
+      transform: translateX(calc(100% + 1rem))
 
   @keyframes slide-out-down
     0%
       transform: translateY(0%)
     100%
-      transform: translateY(100%)
+      transform: translateY(calc(100% + 1rem))
