@@ -2,17 +2,14 @@
   #__page
     Header
     Nuxt.content
-    Socials
 </template>
 
 <script>
 import Header from '~/components/Header.vue'
-import Socials from '~/components/Socials.vue'
 
 export default {
   components: {
-    Header,
-    Socials
+    Header
   }
 }
 </script>
