@@ -20,12 +20,13 @@ en:
   .timeline
     .moments
       .start
-        h2.title {{ $t('page_title') }}
+        h3.title {{ $t('page_title') }}
         Socials
       .moment(v-for='(moment, i) in moments')
-        h4 {{ $t(moment.title) }}
-        img(:src='moment.img')
-        h6 {{ $d(moment.date) }}
+        h5.title {{ $t(moment.title) }}
+        .img
+          img(:src='moment.img')
+        h6.date {{ $d(moment.date) }}
 </template>
 
 <script>
@@ -105,6 +106,37 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    // Code that will run only after the
+    // entire view has been rendered
+    const options = {
+      root: this.$el.querySelector('.moments'),
+      rootMargin: '10px',
+      threshold: 0.8
+    }
+    this.$nextTick(function () {
+      const observer = new IntersectionObserver(this.viewportHandler, options)
+      const elements = this.$el.querySelectorAll('.moment')
+      for (const elm of elements) {
+        observer.observe(elm)
+      }
+    })
+  },
+  methods: {
+    viewportHandler (entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('animate')
+          }, 100)
+        } else {
+          setTimeout(() => {
+            entry.target.classList.remove('animate')
+          }, 100)
+        }
+      })
+    }
   }
 }
 </script>
@@ -120,6 +152,7 @@ export default {
       display: grid
       grid-auto-flow: column
       grid-template-columns: repeat(auto-fit, minmax(auto, calc( 100vw - var(--ui-margin-x) * 2 )))
+      grid-template-rows: 1fr
       grid-gap: var(--ui-margin-y) var(--ui-margin-x)
       // Scroll behavior and snapping
       overflow-x: auto
@@ -140,6 +173,7 @@ export default {
         flex-direction: column
         padding: 0 0 var(--ui-margin-y) 0
         +animate(slide-in-left, 3)
+        margin: var(--ui-margin-y) var(--ui-margin-x)
         // Align scroll snapping
         scroll-snap-align: none center
         // Set min/max width soo it won't be to big while scrolling
@@ -151,24 +185,45 @@ export default {
         &:nth-of-type(even)
           grid-column: span 1
           grid-row: span 1
-          align-self: end
+          align-self: center
         // Add the time 'line'
         &::after
           content: ''
           align-self: center
           position: absolute
-          top: 50%
+          top: calc( 100% - var(--ui-margin-y) )
           left: 50%
           height: 100vh
           width: 0.2rem
           background: var(--color-dark)
           z-index: -1
-        img
-          flex: 1 0 100%
-          // Set max height to contain img
-          max-height: 60vh
-          filter: grayscale(1)
-          transition: all var(--animation-speed) var(--animation-curve)
-          &:hover
+        // Animate on viewport entry
+        &.animate
+          .title
+            +animate(slide-in-up)
+          .img
             filter: grayscale(0)
+            img
+              +shadow(1)
+          .date
+            +animate(slide-in-down)
+        .title
+          padding-bottom: calc(var(--ui-margin-y) / 2)
+          +animate(slide-out-down)
+        .img
+          filter: grayscale(1)
+          transition: all calc(var(--animation-speed) * 3) var(--animation-curve)
+          // To make .date appear behind .img
+          z-index: 100
+          img
+            // Force img to size up
+            min-width: 15rem
+            width: auto
+            max-width: 100%
+            height: auto
+            max-height: 100%
+        .date
+          white-space: nowrap
+          +animate(slide-out-up)
+          padding-top: calc(var(--ui-margin-y) / 2)
 </style>
