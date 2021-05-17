@@ -129,6 +129,11 @@ export default {
       ]
     }
   },
+  head () {
+    return {
+      title: this.$t('page_title')
+    }
+  },
   mounted () {
     // Code that will run only after the
     // entire view has been rendered

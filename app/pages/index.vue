@@ -27,6 +27,11 @@ export default {
   },
   components: {
     Socials
+  },
+  head () {
+    return {
+      title: this.$t('title')
+    }
   }
 }
 </script>
