@@ -38,21 +38,19 @@ export default {
     flex-direction: row
     align-items: center
     justify-content: center
-    font-weight: bold
-    color: #ffffff
-    background: var(--color-primary)
-    font-size: 0.9em
+    font-weight: var(--font-weight-bold) !important
+    color: var(--color-dark)
+    background: transparent
+    font-size: 0.9em !important
     padding: 0.4rem 0.6rem
     transition: all var(--animation-speed) var(--animation-curve)
-    border: none !important
+    border: 0.1rem solid var(--color-dark) !important
     border-radius: 0.2rem
     pointer-events: all
     cursor: pointer
-    +shadow(3)
     span
+      font: inherit
       position: relative
-    &:not(:disabled):hover
-      +shadow(2)
     &:disabled
       background: var(--color-light-secondary)
       color: var(--color-disabled)

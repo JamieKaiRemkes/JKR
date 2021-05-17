@@ -1,7 +1,8 @@
 <i18n lang="yaml">
 en:
   page_title: "See how time passed from my perspective."
-  page_intro: "It's not easy to get to know someone in a small amount of time. Let alone if you are just reading about them. For me, the best way to get to know someone new is to go for a walk together. So let's walk, talk and I'll tell you about some of my best moments."
+  page_intro: "It's not easy to get to know someone in a small amount of time. Especially if you are just reading about them. For me, the best way to get to know someone new is to go for a walk together. So let's walk, talk and I'll tell you about some of my best moments."
+  start_journey: "Start our journey"
   moments_title_birth: "My birth."
   moments_title_crazy: "First time some crazy shinned through."
   moments_title_pirate: "The time I wanted to be a pirate."
@@ -23,6 +24,7 @@ en:
       .start
         h3.title {{ $t('page_title') }}
         p.intro {{ $t('page_intro') }}
+        Button(:text="$t('start_journey')" @click.prevent.native='scrollToFirstMoment')
         Socials
       .moment(v-for='(moment, i) in moments')
         h5.title {{ $t(moment.title) }}
@@ -33,6 +35,7 @@ en:
 
 <script>
 import Socials from '~/components/Socials'
+import Button from '~/components/Button'
 
 export default {
   nuxtI18n: {
@@ -42,7 +45,8 @@ export default {
     }
   },
   components: {
-    Socials
+    Socials,
+    Button
   },
   data () {
     return {
@@ -139,6 +143,10 @@ export default {
           }, 100)
         }
       })
+    },
+    scrollToFirstMoment () {
+      const el = this.$el.querySelector('.moment')
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
     }
   }
 }
@@ -164,7 +172,7 @@ export default {
         width: 1px
       .start
         display: grid
-        grid-template-rows: auto auto 1fr
+        grid-template-rows: auto auto auto 1fr
         grid-gap: var(--ui-margin-y)
         scroll-snap-align: none start
         padding-left: var(--ui-margin-x)
@@ -172,6 +180,15 @@ export default {
           +animate(slide-in-left, 2)
         .intro
           +animate(slide-in-left, 3)
+        .btn
+          +animate(slide-in-left, 4)
+          justify-self: start
+          // Display only on mobile because if screen is bigger first moment is already visible
+          display: none
+          +xs
+            display: block
+        .socials
+          grid-row: -1
       .moment
         position: relative
         display: flex
