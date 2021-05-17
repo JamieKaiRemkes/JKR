@@ -1,7 +1,7 @@
 <i18n lang="yaml">
 en:
   page_title: "See how time passed from my perspective."
-  page_intro: "It's not easy to get to know someone in a small amount of time. Especially if you are just reading about them. For me, the best way to get to know someone new is to go for a walk together. So let's walk, talk and I'll tell you about some of my best moments."
+  page_intro: "It's not easy to get to know someone in a small amount of time. Especially if you are just reading about them. For me the best way to get to know someone is to go for a walk together. So let's walk, talk and I'll tell you about some of my best moments."
   start_journey: "Start our journey"
   moments_title_birth: "My birth."
   moments_title_crazy: "First time some crazy shinned through."
@@ -12,10 +12,25 @@ en:
   moments_title_diploma: "Getting my highschool diploma."
   moments_title_study: "Enjoying the student life."
   moments_title_hack: "'Hacking' my first smart home gadgets."
-  moments_title_camera: "Spending all my money on a new hobby."
   moments_title_love: "Meeting the love of my life."
   moments_title_app: "Creating my first app as a freelancer."
   moments_title_infomercial: "Making my first infomercial."
+nl:
+  page_title: "Zie hoe de tijd is verlopen vanuit mijn perspectief."
+  page_intro: "Het is niet makkelijk iemand te leren kennen in een korte tijd. Zeker niet wanneer je alleen maar over iemand leest. Voor mij is de beste manier iemand te leren kennen samen een wandeling te maken. Dus laten we wandelen, praten en dan vertel ik je over een aantal van mijn beste momenten."
+  start_journey: "Start onze tocht"
+  moments_title_birth: "Mijn geboorte."
+  moments_title_crazy: "De eerte keer dat er een steekje los leek te zitten."
+  moments_title_pirate: "De keer dat ik een piraat wilde worden."
+  moments_title_walk: "De eerste (en enige) keer dat ik 30km liep voor vier dagen."
+  moments_title_robot: "Mijn eerste ervaring met robotica."
+  moments_title_theatre: "De eerste keer dat ik een hoofdrol had."
+  moments_title_diploma: "Mijn middelbare school diploma ophalen."
+  moments_title_study: "Genieten van het studenten leven."
+  moments_title_hack: "Mijn eerste smart home apparaten 'hacken'."
+  moments_title_love: "De liefde van mijn leven ontmoeten."
+  moments_title_app: "De eerste app gemaakt als zzp'er."
+  moments_title_infomercial: "Mijn eerste infomercial."
 </i18n>
 
 <template lang="pug">
