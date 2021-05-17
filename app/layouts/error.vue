@@ -22,10 +22,10 @@ nl:
 import Socials from '~/components/Socials'
 
 export default {
-  layout: 'errorLayout',
   components: {
     Socials
   },
+  layout: 'errorLayout',
   props: {
     error: {
       type: Object,

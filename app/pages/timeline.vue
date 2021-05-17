@@ -33,6 +33,7 @@ en:
 
 <script>
 import Socials from '~/components/Socials'
+
 export default {
   nuxtI18n: {
     paths: {
