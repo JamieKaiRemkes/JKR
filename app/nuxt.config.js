@@ -100,14 +100,16 @@ export default {
     baseUrl: () => window.location.origin,
     vueI18nLoader: true,
     detectBrowserLanguage: {
-      alwaysRedirect: false,
-      fallbackLocale: 'en',
-      onlyOnRoot: true,
       useCookie: true,
       cookieCrossOrigin: false,
       cookieDomain: null,
       cookieKey: 'locale',
-      cookieSecure: true
+      cookieSecure: false,
+      // Always redirect according to cookie
+      alwaysRedirect: true,
+      fallbackLocale: 'en',
+      // Better for SEO
+      onlyOnRoot: true
     },
     // To fix jumping pages on locale change
     skipSettingLocaleOnNavigate: true,
