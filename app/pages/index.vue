@@ -10,8 +10,8 @@ nl:
 <template lang="pug">
   .home
     .container
-      h2.title {{ $t('title') }}
-      h4.subtitle {{ $t('subtitle') }}
+      h1.title {{ $t('title') }}
+      h2.subtitle {{ $t('subtitle') }}
       .img(:style="{ 'background-image': 'url(' + require('~/assets/images/backgrounds/home.png') + ')' }")
       Socials
 </template>
