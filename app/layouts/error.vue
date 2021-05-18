@@ -15,7 +15,7 @@ nl:
       h2.title {{ $t(title) }}
       h4.subtitle {{ $t('subtitle') }}
       .img(:style="{ 'background-image': 'url(' + require('~/assets/images/backgrounds/error.png') + ')' }")
-      Socials
+      Socials(:shareButton='false')
 </template>
 
 <script>
