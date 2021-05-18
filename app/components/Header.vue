@@ -56,6 +56,11 @@ export default {
       mobileMenuOpen: false
     }
   },
+  watch: {
+    $route () {
+      this.mobileMenuOpen = false
+    }
+  },
   computed: {
     hasSlot () {
       return !!this.$slots.default || !!this.$scopedSlots.default
