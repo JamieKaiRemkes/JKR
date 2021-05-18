@@ -19,7 +19,7 @@ nl:
       ul
         li(v-for='(item, i) in menu' :key='i')
           NuxtLink(:to='localePath(item.pathName)')
-            h6 {{$t(item.pathTitle)}}
+            span {{$t(item.pathTitle)}}
     Burger.burger(name='menu' :menuOpen='mobileMenuOpen' @click.native='mobileMenuOpen = !mobileMenuOpen')
     .slot(v-if='hasSlot')
       slot
@@ -130,8 +130,9 @@ export default {
           margin-right: var(--ui-margin-x)
           &:last-of-type
             margin-right: 0
-          a
+          a, span
             color: var(--color-dark)
+            font-weight: var(--font-weight-bold)
             text-decoration: none
             &.nuxt-link-exact-active
               color: var(--color-secondary)

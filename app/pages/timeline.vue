@@ -37,7 +37,7 @@ nl:
   .timeline
     .moments
       .start
-        h3.title {{ $t('page_title') }}
+        h1.title {{ $t('page_title') }}
         p.intro {{ $t('page_intro') }}
         Button(:text="$t('start_journey')" @click.prevent.native='scrollToFirstMoment')
         Socials

@@ -12,8 +12,8 @@ nl:
 <template lang="pug">
   .error
     .container
-      h2.title {{ $t(title) }}
-      h4.subtitle {{ $t('subtitle') }}
+      h1.title {{ $t(title) }}
+      h2.subtitle {{ $t('subtitle') }}
       .img(:style="{ 'background-image': 'url(' + require('~/assets/images/backgrounds/error.png') + ')' }")
       Socials(:shareButton='false')
 </template>
