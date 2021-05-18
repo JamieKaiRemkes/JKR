@@ -13,7 +13,8 @@ nl:
 
 <template lang="pug">
   header
-    Logo.logo(:class='{hide: mobileMenuOpen}')
+    Icon.back(v-if='backButton' name='ui/back' :class='{hide: mobileMenuOpen}' @click.native='$router.back')
+    Logo.logo(v-else :class='{hide: mobileMenuOpen}')
     nav(:class='{hide: !mobileMenuOpen}')
       ul
         li(v-for='(item, i) in menu' :key='i')
@@ -32,6 +33,13 @@ export default {
   components: {
     Logo,
     Burger
+  },
+  props: {
+    backButton: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
   data () {
     return {
@@ -56,14 +64,14 @@ export default {
       mobileMenuOpen: false
     }
   },
-  watch: {
-    $route () {
-      this.mobileMenuOpen = false
-    }
-  },
   computed: {
     hasSlot () {
       return !!this.$slots.default || !!this.$scopedSlots.default
+    }
+  },
+  watch: {
+    $route () {
+      this.mobileMenuOpen = false
     }
   }
 }
@@ -87,7 +95,7 @@ export default {
     +sm
       grid-template-areas: 'logo . nav burger slot'
       grid-template-columns: auto 1fr auto auto auto
-    .logo
+    .logo, .back
       grid-area: logo
       height: var(--icon-size)
       width: var(--icon-size)
