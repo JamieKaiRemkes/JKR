@@ -1,6 +1,6 @@
 <template lang="pug">
   #__page
-    Header
+    Header(:backButton='true')
     Nuxt.content
 </template>
 
