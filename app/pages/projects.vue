@@ -1,9 +1,14 @@
 <i18n lang="yaml">
 en:
   page_title: "Projects"
+<<<<<<< HEAD
   project_title_printing: "3D printing and engeneering"
   project_title_code: "Code and software"
   project_title_film: "Film and photography"
+=======
+  project_title_rollingbeat: "Rolling beat machine"
+  project_title_ht: "HT-montage bedrijf"
+>>>>>>> 49a71e6 (Basic page setup)
 nl:
   page_title: "Projecten"
 </i18n>
@@ -12,17 +17,31 @@ nl:
   .projects
     .contain
       .pagetitle
+<<<<<<< HEAD
         h3.title {{ title }}
       .scroll
         .project(v-for="(project, i) in projects" :data-index='i')
           FracturedImg.tumb(:path='project.tumb')
+=======
+        h3 {{ title }}
+      .scroll
+        .project(v-for="(project, i) in projects" :data-index='i')
+          //- FracturedImg.tumb(:path='project.tumb')
+          ThreeTest.three
+>>>>>>> 49a71e6 (Basic page setup)
           Button.more(text='More')
       Socials
       .pagination(:style='paginationOffset')
         .paralax
+<<<<<<< HEAD
           Icon(name='ui/up' @click.native='previousProject').previous
           h6 {{(currentProjectIndex + 1)}} / {{projects.length}}
           Icon(name='ui/down' @click.native='nextProject').next
+=======
+          Icon(name='ui/up').previeus
+          h6 {{(currentProjectIndex + 1)}} / {{projects.length}}
+          Icon(name='ui/down').next
+>>>>>>> 49a71e6 (Basic page setup)
 </template>
 
 <script>
@@ -141,6 +160,7 @@ export default {
         await this.timeout(70)
         this.typeTitle()
       }
+<<<<<<< HEAD
     },
     previousProject () {
       const previousprojectIndex = this.currentProjectIndex - 1
@@ -157,6 +177,8 @@ export default {
       if (el) {
         el.scrollIntoView()
       }
+=======
+>>>>>>> 49a71e6 (Basic page setup)
     }
   }
 }
@@ -181,6 +203,7 @@ export default {
       +contain
       +padx
       // Add shadow border to the top of the scrollbox
+<<<<<<< HEAD
       &::before, &::after
         content: ''
         position: absolute
@@ -195,11 +218,28 @@ export default {
         bottom: 0
         background: linear-gradient(transparent, var(--color-light))
       .pagetitle
+=======
+      // &::before
+      //   content: ''
+      //   position: absolute
+      //   top: 0
+      //   left: 0
+      //   right: 0
+      //   height: var(--ui-margin-y)
+      //   background: linear-gradient(var(--color-light), transparent)
+      //   z-index: 10
+      .pagetitle
+        position: absolute
+>>>>>>> 49a71e6 (Basic page setup)
         grid-area: title
         white-space: nowrap
         writing-mode: vertical-lr
         // Push text slightly to the left and top to align text with logo and img
+<<<<<<< HEAD
         transform: translate(-20%, -1px)
+=======
+        transform: translate(-20%, -2px)
+>>>>>>> 49a71e6 (Basic page setup)
         // "Pull" grid area to the left
         margin-right: -1rem
         // Make space for curser
@@ -208,6 +248,7 @@ export default {
         overflow-y: auto
         // Get on top of the shadow
         z-index: 100
+<<<<<<< HEAD
         .title
           height: 100%
           &::after
@@ -220,6 +261,18 @@ export default {
             background: var(--color-secondary)
             border-radius: 0.1rem
             +animate(blink, 4, infinite)
+=======
+        &::after
+          content: ''
+          position: absolute
+          left: 0
+          right: 0
+          bottom: 0
+          height: 0.2rem
+          background: var(--color-secondary)
+          border-radius: 0.1rem
+          +animate(blink, 4, infinite)
+>>>>>>> 49a71e6 (Basic page setup)
       .scroll
         grid-area: scroll
         flex: 1 1 100%
@@ -231,8 +284,13 @@ export default {
         overflow-x: visible
         margin: 0 var(--ui-margin-x)
         scroll-behavior: smooth
+<<<<<<< HEAD
         // +sm
         scroll-snap-type: y mandatory
+=======
+        +sm
+          scroll-snap-type: y mandatory
+>>>>>>> 49a71e6 (Basic page setup)
         .project
           scroll-snap-align: center center
           flex: 1 0 100%
@@ -240,18 +298,28 @@ export default {
           width: 100%
           overflow: hidden
           display: grid
+<<<<<<< HEAD
           grid-template-areas: '. . .' '. tumb .' '. more .' '. . .'
           grid-template-columns: var(--ui-margin-x) 1fr var(--ui-margin-x)
           grid-template-rows: calc(var(--ui-margin-y) * 2) 1fr auto calc(var(--ui-margin-y) * 2)
           // Needs padding to remain height 100%
           padding-bottom: var(--ui-margin-y)
           &.animate
+=======
+          grid-template-areas: 'tumb tumb .' '. more .' '. . .'
+          grid-template-columns: auto minmax(auto, 40rem) 1fr
+          grid-template-rows: minmax(auto, 50rem) auto 1fr
+          // Needs padding to remain height 100%
+          padding-bottom: var(--ui-margin-y)
+          // &.animate
+>>>>>>> 49a71e6 (Basic page setup)
             .tumb, .more
               opacity: 1
               transform: scale(1)
           .tumb
             grid-area: tumb
             margin-bottom: var(--ui-margin-y)
+<<<<<<< HEAD
             opacity: 0
             transform: scale(0.95)
             transition: all var(--animation-speed) var(--animation-curve)
@@ -263,6 +331,19 @@ export default {
             justify-self: end
             opacity: 0
             transform: scale(0.95)
+=======
+            // opacity: 0
+            // transform: scale(0.8)
+            transition: all var(--animation-speed) var(--animation-curve)
+          .three
+            grid-area: tumb
+            background: url('~assets/images/moments/pirate.gif')
+          .more
+            grid-area: more
+            justify-self: end
+            // opacity: 0
+            // transform: scale(0.8)
+>>>>>>> 49a71e6 (Basic page setup)
             transition: all var(--animation-speed) var(--animation-curve)
       .socials
         grid-area: socials

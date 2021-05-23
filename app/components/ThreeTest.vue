@@ -5,6 +5,7 @@
 
 <script>
 import * as Three from 'three'
+<<<<<<< HEAD
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 export default {
@@ -15,6 +16,11 @@ export default {
       required: true
     }
   },
+=======
+
+export default {
+  name: 'ThreeTest',
+>>>>>>> 49a71e6 (Basic page setup)
   data () {
     return {
       container: null,
@@ -28,6 +34,7 @@ export default {
     init () {
       this.container = this.$el
 
+<<<<<<< HEAD
       this.camera = new Three.PerspectiveCamera(70, this.container.offsetWidth / this.container.offsetHeight, 0.01, 1000)
       this.camera.position.z = 1
 
@@ -41,10 +48,17 @@ export default {
 
       // Ambient
       this.scene.add(new Three.AmbientLight(0xFFFFFF))
+=======
+      this.camera = new Three.PerspectiveCamera(70, this.container.offsetWidth / this.container.offsetHeight, 0.01, 10)
+      this.camera.position.z = 1
+
+      this.scene = new Three.Scene()
+>>>>>>> 49a71e6 (Basic page setup)
 
       const geometry = new Three.BoxGeometry(0.2, 0.2, 0.2)
       const material = new Three.MeshNormalMaterial()
 
+<<<<<<< HEAD
       // Add image to scene
       const planeGeometry = new Three.PlaneGeometry(60, 20, 1, 1)
       const texture = new Three.TextureLoader().load(this.img, (texture) => {
@@ -69,6 +83,13 @@ export default {
       this.mesh = new Three.Mesh(geometry, material)
       this.scene.add(this.mesh)
 
+=======
+      this.mesh = new Three.Mesh(geometry, material)
+      this.scene.add(this.mesh)
+
+      this.renderer = new Three.WebGLRenderer({ antialias: true, alpha: true })
+      this.renderer.setSize(this.container.offsetWidth, this.container.offsetHeight)
+>>>>>>> 49a71e6 (Basic page setup)
       this.container.appendChild(this.renderer.domElement)
     },
     animate () {
