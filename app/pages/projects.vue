@@ -1,8 +1,9 @@
 <i18n lang="yaml">
 en:
   page_title: "Projects"
-  project_title_rollingbeat: "Rolling beat machine"
-  project_title_ht: "HT-montage bedrijf"
+  project_title_printing: "3D printing and engeneering"
+  project_title_code: "Code and software"
+  project_title_film: "Film and photography"
 nl:
   page_title: "Projecten"
 </i18n>
@@ -11,11 +12,10 @@ nl:
   .projects
     .contain
       .pagetitle
-        h3 {{ title }}
+        h3.title {{ title }}
       .scroll
         .project(v-for="(project, i) in projects" :data-index='i')
-          //- FracturedImg.tumb(:path='project.tumb')
-          ThreeTest.three(:img='project.tumb')
+          FracturedImg.tumb(:path='project.tumb')
           Button.more(text='More')
       Socials
       .pagination(:style='paginationOffset')
@@ -38,28 +38,16 @@ export default {
       title: '',
       projects: [
         {
-          title: 'project_title_jarfish',
-          tumb: require('~/assets/images/moments/pirate.gif')
+          title: 'project_title_printing',
+          tumb: require('~/assets/images/projects/3d.gif')
         },
         {
-          title: 'project_title_ht',
-          tumb: require('~/assets/images/moments/app.gif')
+          title: 'project_title_code',
+          tumb: require('~/assets/images/projects/code.gif')
         },
         {
-          title: 'project_title_garduino',
-          tumb: require('~/assets/images/moments/robot.png')
-        },
-        {
-          title: 'project_title_ht',
-          tumb: require('~/assets/images/moments/diploma.png')
-        },
-        {
-          title: 'project_title_ht',
-          tumb: require('~/assets/images/moments/diploma.png')
-        },
-        {
-          title: 'project_title_ht',
-          tumb: require('~/assets/images/moments/diploma.png')
+          title: 'project_title_film',
+          tumb: require('~/assets/images/projects/film.gif')
         }
       ],
       currentProjectIndex: 0,
@@ -193,22 +181,25 @@ export default {
       +contain
       +padx
       // Add shadow border to the top of the scrollbox
-      // &::before
-      //   content: ''
-      //   position: absolute
-      //   top: 0
-      //   left: 0
-      //   right: 0
-      //   height: var(--ui-margin-y)
-      //   background: linear-gradient(var(--color-light), transparent)
-      //   z-index: 10
-      .pagetitle
+      &::before, &::after
+        content: ''
         position: absolute
+        top: 0
+        left: 0
+        right: 0
+        height: calc(var(--ui-margin-y) * 4)
+        background: linear-gradient(var(--color-light), transparent)
+        z-index: 10
+      &::after
+        top: unset
+        bottom: 0
+        background: linear-gradient(transparent, var(--color-light))
+      .pagetitle
         grid-area: title
         white-space: nowrap
         writing-mode: vertical-lr
         // Push text slightly to the left and top to align text with logo and img
-        transform: translate(-20%, -2px)
+        transform: translate(-20%, -1px)
         // "Pull" grid area to the left
         margin-right: -1rem
         // Make space for curser
@@ -217,16 +208,18 @@ export default {
         overflow-y: auto
         // Get on top of the shadow
         z-index: 100
-        &::after
-          content: ''
-          position: absolute
-          left: 0
-          right: 0
-          bottom: 0
-          height: 0.2rem
-          background: var(--color-secondary)
-          border-radius: 0.1rem
-          +animate(blink, 4, infinite)
+        .title
+          height: 100%
+          &::after
+            content: ''
+            position: absolute
+            left: 0
+            right: 0
+            bottom: 0
+            height: 0.2rem
+            background: var(--color-secondary)
+            border-radius: 0.1rem
+            +animate(blink, 4, infinite)
       .scroll
         grid-area: scroll
         flex: 1 1 100%
@@ -247,9 +240,9 @@ export default {
           width: 100%
           overflow: hidden
           display: grid
-          grid-template-areas: 'tumb tumb .' '. more .' '. . .'
-          grid-template-columns: auto minmax(auto, 40rem) 1fr
-          grid-template-rows: minmax(auto, 50rem) auto 1fr
+          grid-template-areas: '. . .' '. tumb .' '. more .' '. . .'
+          grid-template-columns: var(--ui-margin-x) 1fr var(--ui-margin-x)
+          grid-template-rows: calc(var(--ui-margin-y) * 2) 1fr auto calc(var(--ui-margin-y) * 2)
           // Needs padding to remain height 100%
           padding-bottom: var(--ui-margin-y)
           // &.animate
