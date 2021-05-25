@@ -1,5 +1,8 @@
 name: App CI
 
+env:
+  working_dir: ./app
+
 on:
   push:
     branches:
@@ -19,7 +22,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node: [14]
-        wd: ./app
 
     steps:
       - name: Checkout 🛎
@@ -40,10 +42,10 @@ jobs:
             ${{ runner.os }}-node-
  
       - name: Install dependencies 👨🏻‍💻
-        working-directory: ${{ matrix.wd }}
+        working-directory: ${{ working_dir }}
         run: npm ci
 
       - name: Run linter 👀
-        working-directory: ${{ matrix.wd }}
+        working-directory: ${{ working_dir }}
         run: npm run lint
 
