@@ -1,4 +1,10 @@
 export default {
+  // Setup env to load build env in nuxt while generating static site
+  env: {
+    CONTACT_MAIL: process.env.CONTACT_MAIL,
+    CONTACT_PHONE: process.env.CONTACT_PHONE
+  },
+
   // Server settings
   server: {
     host: '0.0.0.0',
