@@ -37,6 +37,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: log 👨🏻‍💻
+        run: pwd & ls
+
       - name: Install dependencies 👨🏻‍💻
         run: cd app & npm ci
 
