@@ -1,5 +1,5 @@
 export default {
-  // Setup env
+  // Setup env to load build env in nuxt while generating static site
   env: {
     CONTACT_MAIL: process.env.CONTACT_MAIL,
     CONTACT_PHONE: process.env.CONTACT_PHONE
