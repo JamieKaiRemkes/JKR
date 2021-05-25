@@ -15,14 +15,14 @@ nl:
       .scroll
         .project(v-for="(project, i) in projects" :data-index='i')
           //- FracturedImg.tumb(:path='project.tumb')
-          ThreeTest.three
+          ThreeTest.three(:img='project.tumb')
           Button.more(text='More')
       Socials
       .pagination(:style='paginationOffset')
         .paralax
-          Icon(name='ui/up').previeus
+          Icon(name='ui/up' @click.native='previousProject').previous
           h6 {{(currentProjectIndex + 1)}} / {{projects.length}}
-          Icon(name='ui/down').next
+          Icon(name='ui/down' @click.native='nextProject').next
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
       title: '',
       projects: [
         {
-          title: 'project_title_rollingbeat',
+          title: 'project_title_jarfish',
           tumb: require('~/assets/images/moments/pirate.gif')
         },
         {
@@ -153,6 +153,22 @@ export default {
         await this.timeout(70)
         this.typeTitle()
       }
+    },
+    previousProject () {
+      const previousprojectIndex = this.currentProjectIndex - 1
+      this.goToProject(previousprojectIndex)
+    },
+    nextProject () {
+      const nextProjectIndex = this.currentProjectIndex + 1
+      this.goToProject(nextProjectIndex)
+    },
+    goToProject (i) {
+      //  Get element
+      const el = this.$el.querySelector(`div[data-index="${i}"].project`)
+      // Check if element can be found
+      if (el) {
+        el.scrollIntoView()
+      }
     }
   }
 }
@@ -248,7 +264,7 @@ export default {
             transition: all var(--animation-speed) var(--animation-curve)
           .three
             grid-area: tumb
-            background: url('~assets/images/moments/pirate.gif')
+            // background: url('~assets/images/moments/pirate.gif')
           .more
             grid-area: more
             justify-self: end
