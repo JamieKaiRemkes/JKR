@@ -1,5 +1,9 @@
-name: ci
+name: App CI
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./app
 on:
   push:
     branches:
@@ -12,6 +16,7 @@ on:
 
 jobs:
   ci:
+    name: Lint App
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -36,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
+ 
       - name: Install dependencies 👨🏻‍💻
         run: npm ci
 
