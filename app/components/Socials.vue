@@ -51,9 +51,8 @@ export default {
     async share () {
       try {
         await navigator.share(this.shareData)
-        console.log('Shared succesfull')
       } catch (err) {
-        console.log('Something went wrong: ' + err)
+
       }
     }
   }

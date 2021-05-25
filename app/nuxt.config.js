@@ -112,7 +112,7 @@ export default {
       onlyOnRoot: true
     },
     // To fix jumping pages on locale change
-    skipSettingLocaleOnNavigate: true,
+    skipSettingLocaleOnNavigate: true
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
