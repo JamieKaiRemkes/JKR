@@ -1,9 +1,14 @@
 <i18n lang="yaml">
 en:
-  title: "Send me a message!"
+  title: "Contact me."
   paragraph: "You want to continue our journey together? Maybe you just have a general question, don't be afraid! Please send me a message or give me a call, I'll get back to you as quickly as possible!"
+  mail-me: "Send mail!"
+  call-me: "Call me!"
 nl:
-  title: "Stuur mij een bericht!"
+  title: "Neem contact op."
+  paragraph: "Wil jij samen verder? Misschien heb je gewoon een vraag, wees niet bang. Stuur mij een bericht of bel me. Dan neem ik zo spoedig mogenlijk contact met u op!"
+  mail-me: "Stuur een mail!"
+  call-me: "Bel mij!"
 </i18n>
 
 <template lang="pug">
@@ -11,8 +16,8 @@ nl:
     .contact
       h1.title {{ $t('title') }}
       p.paragraph {{ $t('paragraph') }}
-      Button.mail(text='Mail me' :href='`mailto:${mailAdress}`')
-      Button.call(text='Call me' :href='`tel:${phoneNumber}`')
+      Button.mail(:text='$t("mail-me")' :href='`mailto:${mailAdress}`')
+      Button.call(:text='$t("call-me")' :href='`tel:${phoneNumber}`')
       .plane
 </template>
 
