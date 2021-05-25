@@ -19,7 +19,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node: [14]
-      wd: ./app
+        wd: ./app
 
     steps:
       - name: Checkout 🛎
@@ -40,10 +40,10 @@ jobs:
             ${{ runner.os }}-node-
  
       - name: Install dependencies 👨🏻‍💻
-        working-directory: ${{ wd }}
+        working-directory: ${{ matrix.wd }}
         run: npm ci
 
       - name: Run linter 👀
-        working-directory: ${{ wd }}
+        working-directory: ${{ matrix.wd }}
         run: npm run lint
 
