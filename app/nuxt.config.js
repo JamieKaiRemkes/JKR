@@ -79,7 +79,9 @@ export default {
     // https://www.npmjs.com/package/@nuxtjs/style-resources
     '@nuxtjs/style-resources',
     // Add i18n
-    'nuxt-i18n'
+    'nuxt-i18n',
+    // Load env
+    '@nuxtjs/dotenv'
   ],
 
   // Configure i18n

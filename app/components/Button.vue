@@ -1,5 +1,6 @@
 <template lang="pug">
-  button.btn(:type='type' :disabled='disabled' :class='{loading: loading}')
+  //- Use dynamic vue components to render button or link
+  component.btn(:is='componentType' :href='href' :type='type' :disabled='disabled' :class='{loading: loading}')
     span {{text}}
     slot
 </template>
@@ -17,6 +18,11 @@ export default {
       required: false,
       default: 'Click'
     },
+    href: {
+      type: String,
+      required: false,
+      default: null
+    },
     disabled: {
       type: Boolean,
       required: false,
@@ -26,6 +32,14 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    }
+  },
+  computed: {
+    componentType () {
+      if (this.href) {
+        return 'a'
+      }
+      return 'button'
     }
   }
 }
@@ -39,9 +53,10 @@ export default {
     align-items: center
     justify-content: center
     font-weight: var(--font-weight-bold) !important
+    font-size: 0.9em !important
+    text-decoration: none
     color: var(--color-dark)
     background: transparent
-    font-size: 0.9em !important
     padding: 0.4rem 0.6rem
     transition: all var(--animation-speed) var(--animation-curve)
     border: 0.1rem solid var(--color-dark) !important

@@ -15,6 +15,9 @@ en:
   moments_title_love: "Meeting the love of my life."
   moments_title_app: "Creating my first app as a freelancer."
   moments_title_infomercial: "Making my first infomercial."
+  contact_title: "Now how about you?"
+  contact_intro: "I keep on talking about myself! I would love to know more about you, so if you feel like sharing contact me below."
+  contact_me: "Contact me"
 nl:
   page_title: "Zie hoe de tijd is verlopen vanuit mijn perspectief."
   page_intro: "Het is niet makkelijk iemand te leren kennen in een korte tijd. Zeker niet wanneer je alleen maar over iemand leest. Voor mij is de beste manier iemand te leren kennen samen een wandeling te maken. Dus laten we wandelen, praten en dan vertel ik je over een aantal van mijn beste momenten."
@@ -31,6 +34,9 @@ nl:
   moments_title_love: "De liefde van mijn leven ontmoeten."
   moments_title_app: "De eerste app gemaakt als zzp'er."
   moments_title_infomercial: "Mijn eerste infomercial."
+  contact_title: "Hoe zit het met jou?"
+  contact_intro: "Ik blijf maar over mezelf praten! Ik zou het geweldig vinden om meer te weten over jou, als jij meer zou willen delen neem hieronder contact met mij op."
+  contact_me: "Neem contact op"
 </i18n>
 
 <template lang="pug">
@@ -46,6 +52,10 @@ nl:
         .img
           img(:src='moment.img')
         h6.date {{ $d(moment.date) }}
+      .end
+        h3.title {{ $t('contact_title') }}
+        p.intro {{ $t('contact_intro') }}
+        Button(:text="$t('contact_me')" @click.prevent.native='$router.push(localeLocation({ name: "contact" }))')
 </template>
 
 <script>
@@ -270,4 +280,21 @@ export default {
           white-space: nowrap
           +animate(slide-out-up)
           padding-top: calc(var(--ui-margin-y) / 2)
+      .end
+        display: grid
+        grid-template-rows: auto auto auto 1fr
+        grid-gap: var(--ui-margin-y)
+        scroll-snap-align: none start
+        min-width: 20rem
+        align-self: center
+        justify-self: end
+        +xs
+          width: calc(100vw - 2 * var(--ui-margin-x))
+        .title
+          +animate(slide-in-left, 2)
+        .intro
+          +animate(slide-in-left, 3)
+        .btn
+          +animate(slide-in-left, 4)
+          justify-self: start
 </style>
