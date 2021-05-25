@@ -1,4 +1,10 @@
 export default {
+  // Setup env to load build env in nuxt while generating static site
+  env: {
+    CONTACT_MAIL: process.env.CONTACT_MAIL,
+    CONTACT_PHONE: process.env.CONTACT_PHONE
+  },
+
   // Server settings
   server: {
     host: '0.0.0.0',
@@ -79,7 +85,9 @@ export default {
     // https://www.npmjs.com/package/@nuxtjs/style-resources
     '@nuxtjs/style-resources',
     // Add i18n
-    'nuxt-i18n'
+    'nuxt-i18n',
+    // Load env
+    '@nuxtjs/dotenv'
   ],
 
   // Configure i18n
@@ -112,7 +120,7 @@ export default {
       onlyOnRoot: true
     },
     // To fix jumping pages on locale change
-    skipSettingLocaleOnNavigate: true,
+    skipSettingLocaleOnNavigate: true
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
