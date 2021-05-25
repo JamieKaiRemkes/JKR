@@ -1,7 +1,7 @@
 name: App CI
 
 env:
-  working_dir: ./app
+  WORKING_DIR: ./app
 
 on:
   push:
@@ -42,10 +42,10 @@ jobs:
             ${{ runner.os }}-node-
  
       - name: Install dependencies 👨🏻‍💻
-        working-directory: ${{ working_dir }}
+        working-directory: ${{ WORKING_DIR }}
         run: npm ci
 
       - name: Run linter 👀
-        working-directory: ${{ working_dir }}
+        working-directory: ${{ WORKING_DIR }}
         run: npm run lint
 
