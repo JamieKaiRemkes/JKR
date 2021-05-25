@@ -38,8 +38,8 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies 👨🏻‍💻
-        run: npm ci
+        run: cd app & npm ci
 
       - name: Run linter 👀
-        run: npm run lint
+        run: cd app & npm run lint
 
