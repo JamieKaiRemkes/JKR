@@ -117,7 +117,8 @@ export default {
       +animate(slide-in-left, 1)
       +sm
         &.hide
-          width: 0
+          // Because apple cant figure out how to deal with 0px widths this must be an positive int
+          width: 1px
           opacity: 0
       ul
         display: flex
