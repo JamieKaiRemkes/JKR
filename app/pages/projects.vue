@@ -231,8 +231,8 @@ export default {
         overflow-x: visible
         margin: 0 var(--ui-margin-x)
         scroll-behavior: smooth
-        +sm
-          scroll-snap-type: y mandatory
+        // +sm
+        scroll-snap-type: y mandatory
         .project
           scroll-snap-align: center center
           flex: 1 0 100%
@@ -245,15 +245,15 @@ export default {
           grid-template-rows: calc(var(--ui-margin-y) * 2) 1fr auto calc(var(--ui-margin-y) * 2)
           // Needs padding to remain height 100%
           padding-bottom: var(--ui-margin-y)
-          // &.animate
+          &.animate
             .tumb, .more
               opacity: 1
               transform: scale(1)
           .tumb
             grid-area: tumb
             margin-bottom: var(--ui-margin-y)
-            // opacity: 0
-            // transform: scale(0.8)
+            opacity: 0
+            transform: scale(0.95)
             transition: all var(--animation-speed) var(--animation-curve)
           .three
             grid-area: tumb
@@ -261,8 +261,8 @@ export default {
           .more
             grid-area: more
             justify-self: end
-            // opacity: 0
-            // transform: scale(0.8)
+            opacity: 0
+            transform: scale(0.95)
             transition: all var(--animation-speed) var(--animation-curve)
       .socials
         grid-area: socials
