@@ -41,16 +41,16 @@ nl:
 
 <template lang="pug">
   .timeline
+    .control
+      Button.next(:text="$t('start_journey')" @click.prevent.native='next')
     .moments
       .start
         h1.title {{ $t('page_title') }}
         p.intro {{ $t('page_intro') }}
-        Button(:text="$t('start_journey')" @click.prevent.native='scrollToFirstMoment')
         Socials
       .moment(v-for='(moment, i) in moments')
         h5.title {{ $t(moment.title) }}
-        .img
-          img(:src='moment.img')
+        img.img(:src='moment.img')
         h6.date {{ $d(moment.date) }}
       .end
         h3.title {{ $t('contact_title') }}
@@ -63,6 +63,7 @@ import Socials from '~/components/Socials'
 import Button from '~/components/Button'
 
 export default {
+  name: 'Timeline',
   nuxtI18n: {
     paths: {
       en: '/timeline',
@@ -174,9 +175,19 @@ export default {
         }
       })
     },
-    scrollToFirstMoment () {
-      const el = this.$el.querySelector('.moment')
+    next () {
+      const el = this.getNextMoment()
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    },
+    getNextMoment () {
+      const refActive = this.$el.querySelector('.moment.animate') ? this.$el.querySelector('.moment.animate') : null
+      if (refActive) {
+        const refAll = this.$el.querySelector('.moments').children
+        const index = Array.from(refAll).indexOf(refActive)
+        const next = refAll[index + 1]
+        return next
+      }
+      return this.$el.querySelector('.moment')
     }
   }
 }
@@ -185,6 +196,22 @@ export default {
 <style lang="sass" scoped>
   .timeline
     display: grid
+    background: inherit
+    .control
+      // tmp remove
+      display: none
+      position: absolute
+      right: calc(var(--ui-margin-x) * 2.5)
+      bottom: calc(var(--ui-margin-y) * 2.5)
+      pointer-events: none
+      background: inherit
+      .next
+        position: sticky
+        top: 0%
+        right: 0%
+        +animate(slide-in-left, 4)
+        background: var(--color-light)
+        z-index: 10
     .moments
       display: grid
       grid-auto-flow: column
@@ -202,7 +229,7 @@ export default {
         width: 1px
       .start
         display: grid
-        grid-template-rows: auto auto auto 1fr
+        grid-template-rows: auto 1fr
         grid-gap: var(--ui-margin-y)
         scroll-snap-align: none start
         padding-left: var(--ui-margin-x)
@@ -210,13 +237,6 @@ export default {
           +animate(slide-in-left, 2)
         .intro
           +animate(slide-in-left, 3)
-        .btn
-          +animate(slide-in-left, 4)
-          justify-self: start
-          // Display only on mobile because if screen is bigger first moment is already visible
-          display: none
-          +xs
-            display: block
         .socials
           grid-row: -1
       .moment
@@ -230,6 +250,7 @@ export default {
         scroll-snap-align: none center
         // Set min/max width soo it won't be to big while scrolling
         max-width: calc( 100vw - var(--ui-margin-x) * 2 )
+        max-height: calc( 60vh - var(--ui-margin-y) * 2 )
         &:nth-of-type(odd)
           grid-column: span 1
           grid-row: span 1
@@ -268,14 +289,12 @@ export default {
           transition: all calc(var(--animation-speed) * 3) var(--animation-curve)
           // To make .date appear behind .img
           z-index: 100
-          img
-            // Force img to size up
-            min-width: 15rem
-            width: auto
-            max-width: 100%
-            height: auto
-            max-height: 100%
-            border-radius: 0.4rem
+        img
+          // Force img to size up
+          min-width: 15rem
+          max-width: 100%
+          // max-height: 40vh
+          border-radius: 0.4rem
         .date
           white-space: nowrap
           +animate(slide-out-up)

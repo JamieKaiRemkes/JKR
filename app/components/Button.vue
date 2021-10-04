@@ -1,6 +1,6 @@
 <template lang="pug">
   //- Use dynamic vue components to render button or link
-  component.btn(:is='componentType' :href='href' :type='type' :disabled='disabled' :class='{loading: loading}')
+  component.btn(:is='componentType' :href='href' :type='type' :disabled='disabled' :class='{loading: loading, borderless: borderless}')
     span {{text}}
     slot
 </template>
@@ -32,6 +32,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    borderless: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
@@ -39,7 +44,7 @@ export default {
       if (this.href) {
         return 'a'
       }
-      return 'button'
+      return 'span'
     }
   }
 }
@@ -53,16 +58,18 @@ export default {
     align-items: center
     justify-content: center
     font-weight: var(--font-weight-bold) !important
-    font-size: 0.9em !important
-    text-decoration: none
+    font-size: 0.85em !important
+    text-decoration: underline
     color: var(--color-dark)
     background: transparent
-    padding: 0.4rem 0.6rem
     transition: all var(--animation-speed) var(--animation-curve)
-    border: 0.1rem solid var(--color-dark) !important
-    border-radius: 0.2rem
     pointer-events: all
     cursor: pointer
+    &:not(.borderless)
+      text-decoration: none
+      padding: 0.4rem 0.6rem
+      border: 0.1rem solid var(--color-dark) !important
+      border-radius: 0.2rem
     span
       font: inherit
       position: relative
