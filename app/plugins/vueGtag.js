@@ -3,7 +3,7 @@ import VueGtag from 'vue-gtag'
 
 export default ({ isDev, app, store }) => {
   const cookieConsent = store.getters['localStorage/getCookieConsent']
-  const useGTAG = (cookieConsent === true) && !isDev
+  const useGTAG = (cookieConsent === true) && isDev // needs !
 
   Vue.use(VueGtag, {
     appName: 'JKR',

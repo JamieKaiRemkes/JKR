@@ -27,6 +27,9 @@ export default {
     flex-direction: column
     height: var(--icon-size)
     width: var(--icon-size)
+    &.s
+      height: calc(var(--icon-size) * 0.8)
+      width: calc(var(--icon-size) * 0.8)
     &.m
       height: calc(var(--icon-size) * 3)
       width: calc(var(--icon-size) * 3)

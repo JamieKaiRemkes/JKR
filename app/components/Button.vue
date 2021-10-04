@@ -58,7 +58,7 @@ export default {
     align-items: center
     justify-content: center
     font-weight: var(--font-weight-bold) !important
-    font-size: 0.9em !important
+    font-size: 0.85em !important
     text-decoration: underline
     color: var(--color-dark)
     background: transparent

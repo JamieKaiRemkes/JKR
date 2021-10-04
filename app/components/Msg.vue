@@ -1,16 +1,21 @@
 <template lang="pug">
-  .msg(:class='{stack: stackLayout}')
-    .row(v-if='currentMsg' :key='currentMsg.text')
-      .bubble
+  .msg(:class='{stack: stackLayout, visible: (currentMsg && !interactionDisabled)}')
+    .contain(v-if='currentMsg')
+      .bubble(v-touch:swipe.up='nextMsg')
+        Icon.s(v-if='currentMsg.icon' :name='currentMsg.icon')
         .text
-          span {{currentMsg.text}}
+          i18n(tag='span' :path='currentMsg.text')
+            NuxtLink.fill(v-for='(fill, i) in currentMsg.fills' :key='i' :to='localePath(fill.to)') {{$t(fill.text)}}
         .options
           .option(v-for='(option, i) in currentMsg.options' :key='i')
-            Button(:text='option.text' :disabled='interactionDisabled' :borderless='true' @click.native='[option.callback(), nextMsg()]')
+            Button(:text='$t(option.text)' :disabled='interactionDisabled' :borderless='true' @click.native='[option.callback(), nextMsg()]')
 </template>
 
 <script lang="js">
 // type msg = {
+//   i18n: {
+//     locale: {}
+//   }
 //   text: string,
 //   options: [
 //     {
@@ -34,11 +39,8 @@ export default Vue.extend({
     currentMsg () {
       return this.que[0]?.text ? this.que[0] : null
     },
-    currentColor () {
-      return 'white'
-    },
     stackLayout () {
-      return this.currentMsg?.text.length >= 25
+      return this.$t(this.currentMsg?.text).length >= 20
     }
   },
   created () {
@@ -49,26 +51,36 @@ export default Vue.extend({
   methods: {
     handleMsg (msg) {
       this.que.push(msg)
+      if (msg.i18n) {
+        for (const [locale, messages] of Object.entries(msg.i18n)) {
+          this.$i18n.setLocaleMessage(locale, messages)
+        }
+      }
     },
-    nextMsg () {
-      this.interactionDisabled = true
-      if (this.que.length <= 1) {
+    async nextMsg () {
+      await this.animate()
+      this.que.shift()
+    },
+    animate () {
+      return new Promise((resolve, reject) => {
+        this.interactionDisabled = true
         const oh = this.$el.offsetHeight
         this.$el.style.setProperty('--height', oh + 'px')
         this.$el.classList.add('colapse')
+        const speed = getComputedStyle(this.$el).getPropertyValue('--animation-speed')
         setTimeout(() => {
           this.$el.style.setProperty('--height', 0 + 'px')
         }, 10)
         setTimeout(() => {
           this.$el.style.setProperty('--height', 'auto')
-          this.que.shift()
           this.$el.classList.remove('colapse')
           this.interactionDisabled = false
-          // this.$el.style.height = 'auto'
-        }, 2000)
-      } else {
-        this.que.shift()
-      }
+          resolve()
+        }, this.toMs(speed) * 3)
+      })
+    },
+    toMs (s) {
+      return parseFloat(s) * (/\ds$/.test(s) ? 1000 : 1)
     }
   }
 })
@@ -79,25 +91,21 @@ export default Vue.extend({
   transition: all var(--animation-speed) var(--animation-curve)
   height: var(--height)
   overflow: hidden
+  &.visible
+    overflow: unset
   &.stack
-    +sm
-      .row
+    +xs
+      .contain
         .bubble
-          flex-direction: column !important
-          justify-content: flex-start !important
+          grid-template-areas: 'icon .' 'text text' 'options options'
           +pad
-        .options
-          margin-top: var(--ui-margin-y)
-          margin-left: 0 !important
   &.colapse
     +animate(slide-out-up)
     .bubble
-      overflow-y: auto
       background: transparent
       +shadow(0)
-  .row
-    height: 100%
-    flex: 0 1
+  .contain
+    flex: 0 0
     display: flex
     flex-direction: column
     align-content: flex-start
@@ -109,24 +117,35 @@ export default Vue.extend({
     +padx
     +contain
     .bubble
-      flex: 0 1 auto
-      max-height: 100%
-      display: flex
-      flex-direction: row
+      flex: 1 0 100%
+      display: grid
+      grid-gap:  0.4rem var(--ui-margin-x)
+      grid-template-areas: 'icon text options'
       justify-content: center
       background: var(--color-light-secondary)
       border-radius: 0.4rem
-      padding: 0.2rem
-      overflow-y: scroll
+      padding: 0.4rem
       +padx
-      +shadow(0.8)
+      +shadow(0.2)
+      .icon
+        grid-area: icon
+        align-self: center
+        justify-self: center
       .text
-        color: var(--color-dark)
-        font-weight: bold
+        grid-area: text
+        align-self: center
+        justify-self: center
+        *
+          color: var(--color-dark)
+          font-weight: bold
+          font-size: 0.8rem
+          text-decoration: none
+        .fill
+          color: var(--color-secondary)
       .options
+        grid-area: options
         display: flex
         flex-direction: row
-        margin-left: var(--ui-margin-x)
         .option
           display: flex
           align-content: center
@@ -134,11 +153,4 @@ export default Vue.extend({
           margin-left: calc( var(--ui-margin-x) / 2 )
           &:first-of-type
             margin-left: 0
-
-  .fadeHeight-enter-active, .fadeHeight-leave-active
-    // transition: all 0.6s
-    height: var(--height)
-
-  .fadeHeight-enter, .fadeHeight-leave-to
-    max-height: 0px
 </style>

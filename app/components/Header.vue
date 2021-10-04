@@ -12,7 +12,7 @@ nl:
 </i18n>
 
 <template lang="pug">
-  header
+  header(:class='{sticking: sticking}')
     Icon.back(v-if='backButton' name='ui/back' :class='{hide: mobileMenuOpen}' @click.native='$router.back')
     Logo.logo(v-else :class='{hide: mobileMenuOpen}')
     nav(:class='{hide: !mobileMenuOpen}')
@@ -60,7 +60,8 @@ export default {
           pathName: '/contact'
         }
       ],
-      mobileMenuOpen: false
+      mobileMenuOpen: false,
+      sticking: false
     }
   },
   computed: {
@@ -72,6 +73,18 @@ export default {
     $route () {
       this.mobileMenuOpen = false
     }
+  },
+  mounted () {
+    const observer = new IntersectionObserver(this.handleIntersection, {
+      rootMargin: '0px 0px 0px 0px',
+      threshold: [1]
+    })
+    observer.observe(this.$el)
+  },
+  methods: {
+    handleIntersection (e) {
+      !e[0].isIntersecting && (document.querySelector('#__page').scrollTop > 0) ? this.sticking = true : this.sticking = false
+    }
   }
 }
 </script>
@@ -79,7 +92,8 @@ export default {
 <style lang="sass" scoped>
   header
     position: sticky
-    top: 0
+    // -1 for observer
+    top: -1px
     left: 0
     right: 0
     bottom: 0
@@ -89,11 +103,15 @@ export default {
     grid-template-columns: auto 1fr auto auto
     padding: var(--ui-margin-y) var(--ui-margin-x)
     transition: all var(--animation-speed) var(--animation-curve)
+    background: var(--color-light)
     z-index: 100
+    +shadow(0)
     +contain
     +sm
       grid-template-areas: 'logo . nav burger slot'
       grid-template-columns: auto 1fr auto auto auto
+    &.sticking
+      +shadow(1)
     .logo, .back
       grid-area: logo
       height: var(--icon-size)

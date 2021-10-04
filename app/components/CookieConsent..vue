@@ -1,10 +1,12 @@
 <i18n lang='yaml'>
 en:
-  msg: "Accept cookies?"
+  cookiemsg: "Like most apps we analyze app usage to help optimize your experience. You can find more on how we do this in our {0}."
+  cookiepolicy: "privacy policy"
   accept: "Accept"
   decline: "Decline"
 nl:
-  msg: "Accepteer cookies?"
+  cookiemsg: "Zoals de meeste apps analyseren wij app gebruik om uw ervaring te verbeteren. Vind meer over hoe wij dit doen in onze {0}."
+  cookiepolicy: "privacy verklaring"
   accept: "Accepteren"
   decline: "Afwijzen"
 </i18n>
@@ -18,23 +20,34 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'CookieConsent',
   created () {
-    if (!this.$store.getters['localStorage/getCookieConsent']) {
-      this.$nuxt.$emit('msg', {
-        text: `🍪 ${this.$t('msg')}`,
-        options: [
-          {
-            text: `${this.$t('accept')}`,
-            callback: this.acceptCookies
-          },
-          {
-            text: `${this.$t('decline')}`,
-            callback: this.disableCookies
-          }
-        ]
-      })
-    }
+    this.init()
   },
   methods: {
+    init () {
+      if (!this.$store.getters['localStorage/getCookieConsent']) {
+        this.$nuxt.$emit('msg', {
+          i18n: this.$i18n.messages,
+          icon: 'ui/cookie',
+          text: 'cookiemsg',
+          fills: [
+            {
+              text: 'cookiepolicy',
+              to: 'privacy-policy'
+            }
+          ],
+          options: [
+            {
+              text: 'accept',
+              callback: this.acceptCookies
+            },
+            {
+              text: 'decline',
+              callback: this.disableCookies
+            }
+          ]
+        })
+      }
+    },
     disableCookies () {
       this.$store.commit('localStorage/disableCookies')
     },

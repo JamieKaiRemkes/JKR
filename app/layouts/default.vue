@@ -12,6 +12,7 @@ import Header from '~/components/Header.vue'
 import LangSwitcher from '~/components/LangSwitcher.vue'
 
 export default {
+  name: 'DefaultLayout',
   components: {
     Header,
     LangSwitcher
@@ -45,7 +46,7 @@ html, body, #__nuxt
   display: grid
   grid-auto-flow: row
   grid-template-areas: 'msg' 'header' 'content' 'consent'
-  grid-template-rows: auto auto 1fr 0
+  grid-template-rows: auto auto minmax(auto, 1fr) 0
   overflow-y: auto
   overflow-x: hidden
   .msg
