@@ -10,7 +10,7 @@ nl:
 </i18n>
 
 <template lang="pug">
-  .error
+  .error(v-touch:swipe.right='back')
     .container
       h1.title {{ $t(title) }}
       h2.subtitle {{ $t('subtitle') }}
@@ -47,6 +47,11 @@ export default {
   computed: {
     title () {
       return this.error.statusCode === 404 ? 'error_message_not_found' : 'error_message_unknown'
+    }
+  },
+  methods: {
+    back () {
+      this.$router.back()
     }
   }
 }
