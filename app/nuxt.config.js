@@ -1,8 +1,12 @@
 export default {
   // Setup env to load build env in nuxt while generating static site
   env: {
-    CONTACT_MAIL: process.env.CONTACT_MAIL,
-    CONTACT_PHONE: process.env.CONTACT_PHONE
+    CONTACT_MAIL: process.env.CONTACT_MAIL || 'example@example.com',
+    GTAG: process.env.GTAG || 'G-0000000000',
+    CONTACT_PHONE: process.env.CONTACT_PHONE || 1234567890
+  },
+
+  publicRuntimeConfig: {
   },
 
   // Server settings
@@ -62,7 +66,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/i18nTransitionFix'
+    '@/plugins/i18nTransitionFix',
+    { src: '@/plugins/vueGtag', mode: 'client' },
+    { src: '@/plugins/VueTouchEvents', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -87,7 +93,9 @@ export default {
     // Add i18n
     'nuxt-i18n',
     // Load env
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // Persistant storage
+    'nuxt-vuex-localstorage'
   ],
 
   // Configure i18n

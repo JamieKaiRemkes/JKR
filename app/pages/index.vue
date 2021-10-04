@@ -19,6 +19,7 @@ nl:
 <script>
 import Socials from '~/components/Socials'
 export default {
+  name: 'Index',
   nuxtI18n: {
     paths: {
       en: '',
