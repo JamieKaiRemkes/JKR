@@ -7,9 +7,9 @@ ci/cd:
 - any: ['.github/workflows/*']
 
 # Add 'frontend` label to any change to app folder
-frontend:
+app:
 - any: ['app/**/*']
 
 # Add 'backend` label to any change to api folder
-backend:
+api:
 - any: ['api/**/*']
