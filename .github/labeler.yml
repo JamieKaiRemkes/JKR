@@ -1,0 +1,15 @@
+# Add 'repo' label to any root file changes
+repo:
+- '*'
+
+# Add 'frontend` label to any change to app folder
+ci/cd:
+- any: ['.github/workflows/*']
+
+# Add 'frontend` label to any change to app folder
+frontend:
+- any: ['app/**/*']
+
+# Add 'backend` label to any change to api folder
+backend:
+- any: ['api/**/*']
