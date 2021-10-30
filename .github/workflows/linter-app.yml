@@ -1,0 +1,85 @@
+name: App CI
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./app
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  check:
+    name: Check for file changes
+    defaults:
+      run:
+        shell: bash
+        working-directory: app
+    outputs:
+      run_job: ${{ steps.check_files.outputs.run_job }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Check modified files 👀
+        id: check_files
+        run: |
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD > files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != ${PWD##*/}/* ]]; then
+              echo "This modified file is not under the ${PWD##*/} folder."
+              echo "::set-output name=run_job::false"
+            else
+              echo "This modified file is under the ${PWD##*/} folder!"
+              echo "::set-output name=run_job::true"
+              break
+            fi
+          done < files.txt
+  lint:
+    name: Lint the new changes
+    needs: check
+    if: needs.check.outputs.run_job == 'true'
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.5
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+ 
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci
+
+      - name: Run linter 👀
+        run: npm run lint
+
