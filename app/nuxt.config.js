@@ -39,7 +39,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'J.K.R.',
+    title: 'JKR',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0' },
@@ -137,8 +137,8 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      name: 'J.K.R.',
-      short_name: 'J.K.R.',
+      name: 'JKR',
+      short_name: 'JKR',
       theme_color: '#ffffff',
       // Lang is set by i18n
       lang: '',
