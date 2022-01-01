@@ -1,5 +1,6 @@
 <template lang="pug">
-  #__page
+  #__page(:class="{ 'dark-mode': $store.getters['localStorage/getDarkMode'] }")
+    Filters
     Msg
     Header
       LangSwitcher.lang
@@ -49,6 +50,7 @@ html, body, #__nuxt
   grid-template-rows: auto auto minmax(auto, 1fr) 0
   overflow-y: auto
   overflow-x: hidden
+  background: var(--color-light)
   .msg
     grid-area: msg
     z-index: 1000

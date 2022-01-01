@@ -43,7 +43,8 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'theme-color', content: "window.getComputedStyle(document.querySelector('body')).getPropertyValue('--color-light')" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
@@ -95,8 +96,20 @@ export default {
     // Load env
     '@nuxtjs/dotenv',
     // Persistant storage
-    'nuxt-vuex-localstorage'
+    'nuxt-vuex-localstorage',
+    // Auth0
+    '@nuxtjs/auth-next'
   ],
+
+  auth: {
+    // Options
+    strategies: {
+      auth0: {
+        domain: 'jamie-kai-remkes.eu.auth0.com',
+        clientId: 'NpkBazVj69lRu57ioVKF0MHhuYRgv69l',
+      }
+    }
+  },
 
   // Configure i18n
   i18n: {
@@ -139,7 +152,7 @@ export default {
     manifest: {
       name: 'JKR',
       short_name: 'JKR',
-      theme_color: '#ffffff',
+      // theme_color: '#ffffff',
       // Lang is set by i18n
       lang: '',
       start_url: '/',

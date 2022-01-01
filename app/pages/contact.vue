@@ -55,9 +55,11 @@ export default {
       grid-gap: var(--ui-margin-y) var(--ui-margin-x)
       +contain
       +padx
+      padding-bottom: var(--ui-margin-y)
       +xs
-        grid-template-areas: 'title title' 'paragraph paragraph' 'mail call' 'plane plane'
+        grid-template-areas: 'plane plane' 'title title' 'paragraph paragraph' 'mail call'
         grid-template-columns: 1fr 1fr
+        grid-template-rows: 1fr auto auto auto
       .title
         grid-area: title
         +animate(slide-in-right)

@@ -23,7 +23,7 @@ nl:
   page_intro: "Het is niet makkelijk iemand te leren kennen in een korte tijd. Zeker niet wanneer je alleen maar over iemand leest. Voor mij is de beste manier iemand te leren kennen samen een wandeling te maken. Dus laten we wandelen, praten en dan vertel ik je over een aantal van mijn beste momenten."
   start_journey: "Start onze tocht"
   moments_title_birth: "Mijn geboorte."
-  moments_title_crazy: "De eerte keer dat er een steekje los leek te zitten."
+  moments_title_crazy: "De eerste keer dat er een steekje los leek te zitten."
   moments_title_pirate: "De keer dat ik een piraat wilde worden."
   moments_title_walk: "De eerste (en enige) keer dat ik 30km liep voor vier dagen."
   moments_title_robot: "Mijn eerste ervaring met robotica."
@@ -309,6 +309,7 @@ export default {
         justify-self: end
         +xs
           width: calc(100vw - 2 * var(--ui-margin-x))
+          align-self: end
         .title
           +animate(slide-in-left, 2)
         .intro

@@ -25,6 +25,7 @@ export default {
     height: calc(var(--icon-size) * 0.7)
     display: flex
     flex-direction: column
+    color: var(--color-dark)
     *
       position: relative
       background: currentColor

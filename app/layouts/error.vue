@@ -86,6 +86,7 @@ export default {
         background-position: center bottom
         background-repeat: no-repeat
         +animate(slide-in-up, 4)
+        filter: url(#shadow)
         // Set some padding for the backgound image
         margin: var(--ui-margin-y) var(--ui-margin-x) 0 var(--ui-margin-y)
       .socials

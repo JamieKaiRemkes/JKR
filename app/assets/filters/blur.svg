@@ -1,0 +1,34 @@
+  <svg width="0" height="0" viewBox="0 0 0 0" display="none">
+    <defs>
+    </defs>
+    <filter id="blur">
+        <feGaussianBlur stDeviation="15"></feGaussianBlur>
+    </filter>
+    <filter id="shadow">
+      <feOffset in="SourceAlpha" dx="20" dy="20"></feOffset>
+
+      <!-- since the previous filter did not have a result defined and this following one
+      does not have the input set, the result of the above primitive is automatically used
+      as input to the following filter -->
+      <feGaussianBlur stdDeviation="10" result="DROP"></feGaussianBlur>
+
+      <!-- setting/defining the result names in all caps is a good way to make them more
+      distinguishable and the overall code more readable -->
+      <feFlood flood-color="#000" result="COLOR"></feFlood>
+
+      <!-- This primitive is using the outputs of the previous two primitives as
+      input, and outputting a new effect -->
+      <feComposite in="DROP" in2="COLOR" operator="in" result="SHADOW1"></feComposite>
+
+      <feComponentTransfer in="SHADOW1" result="SHADOW">
+        <feFuncA type="table" tableValues="0 0.5"></feFuncA>
+      </feComponentTransfer>
+
+      <!-- You can use ANY two results as inputs to any primitive, regardless
+      of their order in the DOM.-->
+      <feMerge>
+        <feMergeNode in="SHADOW"></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </svg>

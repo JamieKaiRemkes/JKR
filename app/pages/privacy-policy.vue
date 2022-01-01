@@ -103,8 +103,8 @@
 
 <template lang="pug">
   .policy
-    .pad
-      .contain
+    .container
+      .text
         h1 {{$t('title')}}
         h2 {{$t('introtitle')}}
         p {{$t('intro')}}
@@ -136,9 +136,10 @@
         h5 {{$t('thirtpartycookiestitle')}}
         p {{$t('thirtpartycookies')}}
 
-        .consent
-          Button(:text="$t('accept')" @click.native='acceptCookies')
-          Button(:text="$t('decline')" @click.native='disableCookies')
+      .consent(:class='{sticking: sticking}')
+        .buttons
+          Button(:text="$t('decline')" @click.native='disableCookies' :disabled='!$store.getters["localStorage/getCookieConsent"]')
+          Button(:text="$t('accept')" @click.native='acceptCookies' :disabled='$store.getters["localStorage/getCookieConsent"]')
 </template>
 
 <script lang="js">
@@ -151,7 +152,23 @@ export default Vue.extend({
       nl: '/privacy-verklaring'
     }
   },
+  data () {
+    return {
+      sticking: false
+    }
+  },
+  mounted () {
+    const observer = new IntersectionObserver(this.handleIntersection, {
+      root: this.$el,
+      rootMargin: '0px 0px 0px 0px',
+      threshold: [1]
+    })
+    observer.observe(this.$el.querySelector('.consent'))
+  },
   methods: {
+    handleIntersection (e) {
+      e[0].isIntersecting ? this.sticking = true : this.sticking = false
+    },
     disableCookies () {
       this.$store.commit('localStorage/disableCookies')
     },
@@ -163,13 +180,16 @@ export default Vue.extend({
 </script>
 
 <style lang="sass" scoped>
-  .pad
-    +pad
-    padding-top: 0
-    .contain
+  .container
+    +contain
+    .text
+      +padx
       display: grid
       grid-gap: var(--ui-margin-y) var(--ui-margin-x)
-      +contain
+      > *
+        max-width: 35rem
+        +sm
+          max-width: unset
       h1
         +animate(slide-in-right)
       h2
@@ -178,8 +198,21 @@ export default Vue.extend({
         +animate(slide-in-right, 1.6)
       p
         +animate(slide-in-right, 1.8)
-      .consent
+    .consent
+      position: sticky
+      bottom: -1px
+      background: var(--color-light)
+      // margin-top: var(--ui-margin-y)
+      +pad
+      +animate(slide-in-up, 1.2)
+      .buttons
+        max-width: 35rem
         display: grid
         grid-auto-flow: column
+        grid-template-columns: 1fr 1fr
         grid-gap: var(--ui-margin-x)
+        +sm
+          max-width: unset
+      &.sticking
+        +shadow(1)
 </style>
