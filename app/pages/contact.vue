@@ -49,15 +49,17 @@ export default {
     .contact
       flex: 1 1 100%
       display: grid
-      grid-template-areas: 'title title .' 'paragraph paragraph .' 'mail call .' 'plane plane plane'
+      grid-template-areas: 'plane plane plane' 'title title .' 'paragraph paragraph .' 'mail call .'
       grid-template-columns: minmax(auto, 20rem) minmax(auto, 20rem) 1fr
-      grid-template-rows: auto auto auto 1fr
+      grid-template-rows: 1fr auto auto auto
       grid-gap: var(--ui-margin-y) var(--ui-margin-x)
       +contain
       +padx
+      padding-bottom: var(--ui-margin-y)
       +xs
-        grid-template-areas: 'title title' 'paragraph paragraph' 'mail call' 'plane plane'
+        grid-template-areas: 'plane plane' 'title title' 'paragraph paragraph' 'mail call'
         grid-template-columns: 1fr 1fr
+        grid-template-rows: 1fr auto auto auto
       .title
         grid-area: title
         +animate(slide-in-right)

@@ -6,4 +6,5 @@
   .logo
     flex: 0 0 var(--icon-size)
     align-self: center
+    fill: var(--color-dark) !important
 </style>

@@ -27,6 +27,7 @@ export default {
     flex-direction: column
     height: var(--icon-size)
     width: var(--icon-size)
+    color: var(--color-dark)
     &.s
       height: calc(var(--icon-size) * 0.8)
       width: calc(var(--icon-size) * 0.8)

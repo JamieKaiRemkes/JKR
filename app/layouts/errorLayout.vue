@@ -1,5 +1,6 @@
 <template lang="pug">
-  #__page
+  #__page(:class="{ 'dark-mode': $store.getters['localStorage/getDarkMode'] }")
+    Filters
     Msg
     Header(:backButton='true')
     Nuxt.content
@@ -17,5 +18,5 @@ export default {
 </script>
 
 <style lang="sass">
-// 'inherits' styles from default becouse of scope
+// 'inherits' styles from default because of scope
 </style>

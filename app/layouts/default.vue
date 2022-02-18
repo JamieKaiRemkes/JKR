@@ -1,5 +1,6 @@
 <template lang="pug">
-  #__page
+  #__page(:class="{ 'dark-mode': $store.getters['localStorage/getDarkMode'] }")
+    Filters
     Msg
     Header
       LangSwitcher.lang
@@ -7,17 +8,16 @@
     CookieConsent
 </template>
 
-<script>
-import Header from '~/components/Header.vue'
-import LangSwitcher from '~/components/LangSwitcher.vue'
-
-export default {
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
   name: 'DefaultLayout',
-  components: {
-    Header,
-    LangSwitcher
+  mounted () {
+    const meta = document.querySelector('meta[name="theme-color"]')
+    const barColor = getComputedStyle(document.querySelector('#__page')).getPropertyValue('--color-light')
+    meta.setAttribute('content', barColor)
   }
-}
+})
 </script>
 
 <style lang="sass">
@@ -49,6 +49,7 @@ html, body, #__nuxt
   grid-template-rows: auto auto minmax(auto, 1fr) 0
   overflow-y: auto
   overflow-x: hidden
+  background: var(--color-light)
   .msg
     grid-area: msg
     z-index: 1000
