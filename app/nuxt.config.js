@@ -7,6 +7,8 @@ export default {
   },
 
   publicRuntimeConfig: {
+    AUTH_DOMAIN: process.env.AUTH_DOMAIN || 'jamie-kai-remkes.eu.auth0.com',
+    AUTH_CLIENT_KEY: process.env.AUTH_CLIENT_KEY || 'NpkBazVj69lRu57ioVKF0MHhuYRgv69l'
   },
 
   // Server settings
@@ -69,7 +71,8 @@ export default {
   plugins: [
     '@/plugins/i18nTransitionFix',
     { src: '@/plugins/vueGtag', mode: 'client' },
-    { src: '@/plugins/VueTouchEvents', mode: 'client' }
+    { src: '@/plugins/VueTouchEvents', mode: 'client' },
+    { src: '@/plugins/clickOutside', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -105,8 +108,8 @@ export default {
     // Options
     strategies: {
       auth0: {
-        domain: 'jamie-kai-remkes.eu.auth0.com',
-        clientId: 'NpkBazVj69lRu57ioVKF0MHhuYRgv69l',
+        domain: process.env.AUTH_DOMAIN || 'jamie-kai-remkes.eu.auth0.com',
+        clientId: process.env.AUTH_CLIENT_KEY || 'NpkBazVj69lRu57ioVKF0MHhuYRgv69l'
       }
     }
   },
@@ -152,7 +155,7 @@ export default {
     manifest: {
       name: 'JKR',
       short_name: 'JKR',
-      // theme_color: '#ffffff',
+      theme_color: '#ffffff',
       // Lang is set by i18n
       lang: '',
       start_url: '/',

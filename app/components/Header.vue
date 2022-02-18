@@ -22,7 +22,7 @@ nl:
           NuxtLink(:to='localePath(item.pathName)') {{$t(item.pathTitle)}}
     Burger.burger(name='menu' :menuOpen='mobileMenuOpen' @click.native='mobileMenuOpen = !mobileMenuOpen')
     Login
-    .slot(v-if='hasSlot && !$auth.user')
+    .slot(v-if='hasSlot')
       slot
 </template>
 
@@ -171,6 +171,5 @@ export default {
       +animate(slide-in-left, 3)
     .slot
       grid-area: slot
-      margin-left: var(--ui-margin-x)
       +animate(slide-in-left, 3.5)
 </style>

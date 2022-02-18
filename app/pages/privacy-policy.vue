@@ -159,7 +159,7 @@ export default Vue.extend({
   },
   mounted () {
     const observer = new IntersectionObserver(this.handleIntersection, {
-      root: this.$el,
+      root: null,
       rootMargin: '0px 0px 0px 0px',
       threshold: [1]
     })
@@ -167,7 +167,7 @@ export default Vue.extend({
   },
   methods: {
     handleIntersection (e) {
-      e[0].isIntersecting ? this.sticking = true : this.sticking = false
+      !e[0].isIntersecting ? this.sticking = true : this.sticking = false
     },
     disableCookies () {
       this.$store.commit('localStorage/disableCookies')
@@ -202,7 +202,7 @@ export default Vue.extend({
       position: sticky
       bottom: -1px
       background: var(--color-light)
-      // margin-top: var(--ui-margin-y)
+      transition: all var(--animation-speed) var(--animation-curve)
       +pad
       +animate(slide-in-up, 1.2)
       .buttons

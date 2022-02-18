@@ -1,5 +1,5 @@
 <template lang="pug">
-  #__page
+  #__page(:class="{ 'dark-mode': $store.getters['localStorage/getDarkMode'] }")
     Filters
     Msg
     Header(:backButton='true')

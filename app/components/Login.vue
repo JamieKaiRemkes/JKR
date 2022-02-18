@@ -19,7 +19,6 @@ export default Vue.extend({
   },
   methods: {
     login () {
-      this.$store.dispatch('user/login')
       this.$auth.loginWith('auth0')
     }
   }
@@ -47,8 +46,6 @@ export default Vue.extend({
       text-decoration: none
       transition: inherit
       margin-left: 0.2rem
-    .nuxt-link-exact-active
-
     .icon
       padding: 0.1rem
       margin-left: 0.2rem

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .switcher
+  .switcher(v-if='!$auth.user')
     NuxtLink(v-for='(locale, i) in locales' :key='i' :to='switchLocalePath(locale.code)')
       Icon(:name='`flags/${locale.code}`' :class='{active: !!(currentLocale == locale.code)}' :style='{transform: translateY(i)}')
 </template>
@@ -30,9 +30,11 @@ export default {
 <style lang="sass">
   .switcher
     position: relative
+    justify-self: center
     display: grid
     grid-auto-flow: row
     grid-gap: 1rem
+    margin-left: var(--ui-margin-x)
     // Add padding to height so it stays round
     height: calc(var(--icon-size) + 0.4rem)
     z-index: 100
