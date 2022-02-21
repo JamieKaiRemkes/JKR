@@ -41,17 +41,20 @@ nl:
 
 <template lang="pug">
   .timeline
-    .control
+    .start-journey
       Button.next(:text="$t('start_journey')" @click.prevent.native='next')
     .moments
       .start
         h1.title {{ $t('page_title') }}
         p.intro {{ $t('page_intro') }}
         Socials
-      .moment(v-for='(moment, i) in moments')
-        h5.title {{ $t(moment.title) }}
+      span.moment(v-for='(moment, i) in moments')
+        h5.title {{ $t(moment.title) + i }} {{ lastVisibleMoment }}
         img.img(:src='moment.img')
         h6.date {{ $d(moment.date) }}
+        .control(:class='{show: (lastVisibleMoment == i)}')
+          Icon(name='ui/arrow-left' @click.native='next')
+          Icon(name='ui/arrow-right' @click.native='next')
       .end
         h3.title {{ $t('contact_title') }}
         p.intro {{ $t('contact_intro') }}
@@ -76,6 +79,7 @@ export default {
   },
   data () {
     return {
+      lastVisibleMoment: 0,
       moments: [
         {
           title: 'moments_title_birth',
@@ -145,13 +149,25 @@ export default {
       title: this.$t('page_title')
     }
   },
+  computed: {
+    // getLastVisibleMoment () {
+    //   try {
+    //     const refActive = document.querySelector('.moment.animate') ? document.querySelector('.moment.animate') : null
+    //     const refAll = document.querySelector('.moments').children
+    //     const index = Array.from(refAll).indexOf(refActive)
+    //     return index
+    //   } catch {
+    //     return 0
+    //   }
+    // }
+  },
   mounted () {
     // Code that will run only after the
     // entire view has been rendered
     const options = {
       root: this.$el.querySelector('.moments'),
       rootMargin: '10px',
-      threshold: 0.8
+      threshold: 1
     }
     this.$nextTick(function () {
       const observer = new IntersectionObserver(this.viewportHandler, options)
@@ -166,6 +182,8 @@ export default {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
+            const i = Array.prototype.indexOf.call(entry.target.parentNode.children, entry.target)
+            this.lastVisibleMoment = i - 1
             entry.target.classList.add('animate')
           }, 100)
         } else {
@@ -197,9 +215,7 @@ export default {
   .timeline
     display: grid
     background: inherit
-    .control
-      // tmp remove
-      display: none
+    .start-journey
       position: absolute
       right: calc(var(--ui-margin-x) * 2.5)
       bottom: calc(var(--ui-margin-y) * 2.5)
@@ -299,6 +315,18 @@ export default {
           white-space: nowrap
           +animate(slide-out-up)
           padding-top: calc(var(--ui-margin-y) / 2)
+        .control
+          display: flex
+          flex-direction: row
+          justify-content: space-between
+          margin-top: 2rem
+          opacity: 0
+          pointer-events: none
+          +animate(slide-out-up)
+        &.animate .show
+          +animate(slide-in-down)
+          opacity: 1
+          pointer-events: all
       .end
         display: grid
         grid-template-rows: auto auto auto 1fr
