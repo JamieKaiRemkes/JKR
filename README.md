@@ -1,5 +1,5 @@
 # JKR
-Welcome to my portfolio project, a software project for me to show my current skills and have a place to try new things. You can follow my progress as a developer and maybe you will find something usefull for one of your own projects!
+Welcome to my portfolio project, a software project for me to show my current skills and have a place to try new things. You can follow my progress as a developer and maybe you will find something usefull for one of your own projects!!
 
 ## Getting Started
 
