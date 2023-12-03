@@ -42,27 +42,24 @@ nl:
 <template lang="pug">
 .timeline
   .control
-    Button.next(:text="$t('start_journey')" @click.prevent.native='next')
+    Button.next(:text="i18n.t('start_journey')" @click.prevent.native='next')
   .moments
     .start
-      h1.title {{ $t('page_title') }}
-      p.intro {{ $t('page_intro') }}
+      h1.title {{ i18n.t('page_title') }}
+      p.intro {{ i18n.t('page_intro') }}
       Socials
     .moment(v-for='(moment, i) in moments')
-      h5.title {{ $t(moment.title) }}
+      h5.title {{ i18n.t(moment.title) }}
       img.img(:src='moment.img')
-      h6.date {{ $d(moment.date) }}
+      h6.date {{ i18n.d(moment.date) }}
     .end
-      h3.title {{ $t('contact_title') }}
-      p.intro {{ $t('contact_intro') }}
-      Button(:text="$t('contact_me')" @click.prevent.native='$router.push(localeLocation({ name: "contact" }))')
+      h3.title {{ i18n.t('contact_title') }}
+      p.intro {{ i18n.t('contact_intro') }}
+      Button(:text="i18n.t('contact_me')" @click.prevent.native='$router.push(localeLocation({ name: "contact" }))')
 </template>
 
 <script>
-import Socials from '~/components/Socials'
-import Button from '~/components/Button'
-
-export default {
+export default defineComponent({
   name: 'Timeline',
   nuxtI18n: {
     paths: {
@@ -70,82 +67,85 @@ export default {
       nl: '/tijdlijn'
     }
   },
-  components: {
-    Socials,
-    Button
+  setup() {
+    const i18n = useI18n({
+      useScope: "local",
+    });
+
+    return { i18n }
   },
-  data () {
+  data() {
     return {
       moments: [
         {
           title: 'moments_title_birth',
           date: new Date(1999, 5, 2),
-          img: require('~/assets/images/moments/birth.png')
+          img: '/moments/birth.png'
         },
         {
           title: 'moments_title_crazy',
           date: new Date(2006, 3, 20),
-          img: require('~/assets/images/moments/crazy.png')
+          img: '/moments/crazy.png'
         },
         {
           title: 'moments_title_pirate',
           date: new Date(2007, 7, 26),
-          img: require('~/assets/images/moments/pirate.gif')
+          img: '/moments/pirate.gif'
         },
         {
           title: 'moments_title_walk',
           date: new Date(2011, 6, 20),
-          img: require('~/assets/images/moments/walk.gif')
+          img: '/moments/walk.gif'
         },
         {
           title: 'moments_title_robot',
           date: new Date(2011, 7, 1),
-          img: require('~/assets/images/moments/robot.png')
+          img: '/moments/robot.png'
         },
         {
           title: 'moments_title_theatre',
           date: new Date(2011, 7, 23),
-          img: require('~/assets/images/moments/theatre.png')
+          img: '/moments/theatre.png'
         },
         {
           title: 'moments_title_diploma',
           date: new Date(2016, 6, 14),
-          img: require('~/assets/images/moments/diploma.png')
+          img: '/moments/diploma.png'
         },
         {
           title: 'moments_title_study',
           date: new Date(2016, 8, 15),
-          img: require('~/assets/images/moments/study.png')
+          img: '/moments/study.png'
         },
         {
           title: 'moments_title_hack',
           date: new Date(2016, 11, 4),
-          img: require('~/assets/images/moments/hack.gif')
+          img: '/moments/hack.gif'
         },
         {
           title: 'moments_title_love',
           date: new Date(2018, 6, 7),
-          img: require('~/assets/images/moments/love.png')
+          img: '/moments/love.png'
         },
         {
           title: 'moments_title_app',
           date: new Date(2019, 5, 5),
-          img: require('~/assets/images/moments/app.gif')
+          img: '/moments/app.gif'
         },
         {
           title: 'moments_title_infomercial',
           date: new Date(2019, 2, 31),
-          img: require('~/assets/images/moments/infomercial.gif')
+          img: '/moments/infomercial.gif'
         }
       ]
     }
   },
-  head () {
+  head() {
     return {
       title: this.$t('page_title')
     }
   },
-  mounted () {
+  mounted() {
     // Code that will run only after the
     // entire view has been rendered
     const options = {
@@ -162,7 +162,7 @@ export default {
     })
   },
   methods: {
-    viewportHandler (entries) {
+    viewportHandler(entries) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
@@ -175,11 +175,11 @@ export default {
         }
       })
     },
-    next () {
+    next() {
       const el = this.getNextMoment()
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
     },
-    getNextMoment () {
+    getNextMoment() {
       const refActive = this.$el.querySelector('.moment.animate') ? this.$el.querySelector('.moment.animate') : null
       if (refActive) {
         const refAll = this.$el.querySelector('.moments').children
@@ -190,7 +190,7 @@ export default {
       return this.$el.querySelector('.moment')
     }
   }
-}
+})
 </script>
 
 <style lang="sass" scoped>

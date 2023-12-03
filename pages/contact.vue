@@ -14,19 +14,26 @@ nl:
 <template lang="pug">
 .container
   .contact
-    h1.title {{ $t('title') }}
-    p.paragraph {{ $t('paragraph') }}
-    Button.mail(:text='$t("mail-me")' :href='`mailto:${mailAdress}`')
-    Button.call(:text='$t("call-me")' :href='`tel:${phoneNumber}`')
+    h1.title {{ i18n.t('title') }}
+    p.paragraph {{ i18n.t('paragraph') }}
+    Button.mail(:text='i18n.t("mail-me")' :href='`mailto:${mailAdress}`')
+    Button.call(:text='i18n.t("call-me")' :href='`tel:${phoneNumber}`')
     .plane
 </template>
 
 <script>
-export default {
+export default defineComponent({
   nuxtI18n: {
     paths: {
       en: '/contact',
       nl: '/contact'
+    }
+  },
+  setup () {
+    const i18n = useI18n()
+
+    return {
+      i18n
     }
   },
   data () {
@@ -40,7 +47,7 @@ export default {
       title: this.$t('title')
     }
   }
-}
+})
 </script>
 
 <style lang="sass" scoped>
@@ -74,7 +81,7 @@ export default {
       +animate(slide-in-right, 3)
     .plane
       grid-area: plane
-      background-image: url('~assets/images/backgrounds/contact.gif')
+      background-image: url('~/assets/images/backgrounds/contact.gif')
       background-repeat: no-repeat
       background-position: center
       background-size: contain
