@@ -17,8 +17,18 @@ nl:
 
 <script>
 import Icon from '~/components/Icon.vue'
+import { useI18n } from '#i18n';
 
 export default defineComponent({
+  setup () {
+    const i18n = useI18n({
+      useScope: "local",
+    });
+
+    return {
+      i18n
+    }
+  },
   components: {
     Icon
   },

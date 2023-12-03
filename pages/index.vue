@@ -10,14 +10,18 @@ nl:
 <template lang="pug">
 .home
   .container
-    h1.title {{ $t('title') }}
-    h2.subtitle {{ $t('subtitle') }}
-    .img(:style="{ 'background-image': 'url(' +  + ')' }")
+    h1.title {{ i18n.t('title') }}
+    h2.subtitle {{ i18n.t('subtitle') }}
+    .img(:style="{ 'background-image': 'url(' + background  + ')' }")
     Socials
 </template>
 
 <script setup lang="ts">
 import background from '~/assets/images/backgrounds/home.png'
+
+const i18n = useI18n({
+  useScope: "local",
+});
 </script>
 
 <style lang="sass" scoped>

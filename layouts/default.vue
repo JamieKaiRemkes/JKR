@@ -3,8 +3,8 @@
   Filters
   //- Msg
   Header
-  //-   LangSwitcher.lazng
-  //- Nuxt.content
+    //- LangSwitcher.lazng
+  slot
   //- CookieConsent
 </template>
 

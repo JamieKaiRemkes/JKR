@@ -19,7 +19,7 @@ header(:class='{sticking: sticking}')
   nav(:class='{hide: !mobileMenuOpen}')
     ul
       li(v-for='(item, i) in menu' :key='i')
-        NuxtLink(:to='localePath(item.pathName)') {{$t(item.pathTitle)}}
+        NuxtLink(:to='localePath(item.pathName)') {{i18n.t(item.pathTitle)}}
   Burger.burger(name='menu' :menuOpen='mobileMenuOpen' @click.native='mobileMenuOpen = !mobileMenuOpen')
   //- Login
   //- .slot(v-if='hasSlot')
@@ -27,7 +27,18 @@ header(:class='{sticking: sticking}')
 </template>
 
 <script lang="ts">
+import { useI18n } from '#i18n';
+
 export default defineComponent({
+  setup () {
+    const i18n = useI18n({
+      useScope: "local",
+    });
+
+    return {
+      i18n
+    }
+  },
   props: {
     backButton: {
       type: Boolean,

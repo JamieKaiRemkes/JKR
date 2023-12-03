@@ -1,22 +1,19 @@
 <template lang="pug">
-.icon(v-html="src")
+component.icon(:is="is")
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'Icon',
-  props: {
-    name: {
-      type: String,
-      required: true
-    }
-  },
-  computed: {
-    src () {
-      const src = require(`~/assets/icons/${this.name}.svg?raw`)
-      return src
-    }
+<script setup lang="ts">
+const props = defineProps({
+  name: {
+    type: String,
+    required: true
   }
+})
+
+const is = computed(() => {
+  const path = `../assets/icons/${props.name}.svg?component`;
+
+  return defineAsyncComponent(() => import(path))
 })
 </script>
 
