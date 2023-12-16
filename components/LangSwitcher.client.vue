@@ -1,30 +1,23 @@
 <template lang="pug">
-.switcher(v-if='!$auth.user')
-  NuxtLink(v-for='(locale, i) in locales' :key='i' :to='switchLocalePath(locale.code)')
-    Icon(:name='`flags/${locale.code}`' :class='{active: !!(currentLocale == locale.code)}' :style='{transform: translateY(i)}')
+.switcher
+  NuxtLink(v-for='(locale, i) in locales' :key='i' :to='switchLocalePath(locale)' :style='{transform: translateY(i)}' :class='{ active: !!(currentLocale.value == locale) }')
+    Icon(:name='`${locale}`')
 </template>
 
-<script lang="ts">
-import Icon from '~/components/Icon.vue'
+<script setup lang="ts">
+const i18n = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 
-export default defineComponent({
-  components: {
-    Icon
-  },
-  computed: {
-    locales () {
-      return this.$i18n.locales
-    },
-    currentLocale () {
-      return this.$i18n.locale
-    }
-  },
-  methods: {
-    translateY (index: number) {
-      return `translateY(calc(-${index}rem - ${(index * 100)}%))`
-    }
-  }
+const locales = computed(() => {
+  return i18n.availableLocales
 })
+const currentLocale = computed(() => {
+  return i18n.locale
+})
+
+const translateY = (index: number) => {
+  return `translateY(calc(-${index}rem - ${(index * 100)}%))`
+}
 </script>
 
 <style lang="sass">
@@ -46,20 +39,18 @@ export default defineComponent({
   border-radius: 100%
   // Reset transform to slide out all flags from behind current locale
   &:hover
-    .icon
+    a
       transform: translateY(0%) !important
-  .icon
+  a
     position: relative
     display: block
     transition: all var(--animation-speed) var(--animation-curve)
-    // to get rid off small edges while overlapping
-    border: solid 0.05rem var(--color-light)
     border-radius: 100%
     &.active
       z-index: 10
-      &:hover
-        +shadow(1)
-    // Add an after element to make hover work inbetween icons
+    &:hover
+      +shadow(1)
+    // Add an after element to make hover work in between icons
     &::after
       content: ''
       position: absolute

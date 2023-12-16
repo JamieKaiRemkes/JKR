@@ -11,6 +11,7 @@
     "lint": "npm run lint:js"
   },
   "devDependencies": {
+    "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/i18n": "^8.0.0-rc.5",
     "nuxt": "^3.8.2",
     "nuxt-svgo": "^3.6.0",

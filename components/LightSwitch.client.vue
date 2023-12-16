@@ -12,20 +12,21 @@
 <template lang="pug">
 .lightswitch(@click='showPopup = !showPopup' ref='lightSwitch')
   label
-    Icon(v-if='store.getDarkMode' name='ui/moon')
-    Icon(v-else name='ui/sun')
-    .automatic(v-if='store.getSyncSystemDarkMode')
-      Icon(name='ui/automatic')
-  //- .popup(:class='{active: showPopup}' v-click-outside="{ exclude: ['lightSwitch'], handler: 'hidePopup' }")
-  //-   .options
-  //-     .option(v-for='(option, i) in options' :key='option.name+i' @click='option.callback')
-  //-       span {{ $t(option.name) }}
+    Icon(v-if='$colorMode.value == "dark"' name='moon' filled)
+    Icon(v-else name='sun' filled)
+    .automatic(v-if='$colorMode.preference == "system"')
+      Icon(name='automatic' filled)
+  .popup(:class='{active: showPopup}' v-click-outside="hidePopup")
+    .options
+      .option(v-for='(option, i) in options' :key='option.name+i' @click='option.callback')
+        span {{ i18n.t(option.name) }}
 </template>
 
 <script lang="ts">
 import { useI18n } from '#i18n';
 
 const store = useLocalStore()
+const colorMode = useColorMode()
 
 export default defineComponent({
   setup () {
@@ -34,7 +35,8 @@ export default defineComponent({
     });
 
     return {
-      i18n
+      i18n,
+      store
     }
   },
   data () {
@@ -44,21 +46,19 @@ export default defineComponent({
         {
           name: 'auto',
           callback: () => {
-            store.enableSyncSystemDarkMode
+            colorMode.preference = 'system'
           }
         },
         {
           name: 'light',
           callback: () => {
-            store.disableSyncSystemDarkMode
-            store.disableDarkMode
+            colorMode.preference = 'light'
           }
         },
         {
           name: 'dark',
           callback: () => {
-            store.disableSyncSystemDarkMode
-            store.enableDarkMode
+            colorMode.preference = 'dark'
           }
         }
       ]
@@ -98,6 +98,7 @@ export default defineComponent({
     transition: all var(--animation-speed) var(--animation-curve)
     opacity: 0
     pointer-events: none
+    z-index: 100
     &.active
       opacity: 1
       pointer-events: all

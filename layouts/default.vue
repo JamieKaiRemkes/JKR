@@ -1,22 +1,12 @@
 <template lang="pug">
-#__page(:class="{ 'dark-mode': store.getDarkMode }")
+#__page
   Filters
   //- Msg
   Header
-    //- LangSwitcher.lazng
-  slot
+    LangSwitcher
+  NuxtPage
   //- CookieConsent
 </template>
-
-<script setup lang="ts">
-const store = useLocalStore()
-
-const onMount = () => {
-  const meta = document.querySelector('meta[name="theme-color"]')
-  const barColor = getComputedStyle(document.querySelector('#__page')).getPropertyValue('--color-light')
-  meta ? meta.setAttribute('content', barColor) : null
-}
-</script>
 
 <style lang="sass">
 html, body, #__nuxt

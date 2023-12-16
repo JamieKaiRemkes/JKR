@@ -13,17 +13,17 @@ nl:
 
 <template lang="pug">
 header(:class='{sticking: sticking}')
-  Icon.back(v-if='backButton' name='ui/back' :class='{hide: mobileMenuOpen}' @click.native='goBack')
+  Icon.back(v-if='backButton' name='back' :class='{hide: mobileMenuOpen}' @click.native='goBack')
   Logo.logo(v-else :class='{hide: mobileMenuOpen}')
-  //- LightSwitch
+  LightSwitch
   nav(:class='{hide: !mobileMenuOpen}')
     ul
       li(v-for='(item, i) in menu' :key='i')
         NuxtLink(:to='localePath(item.pathName)') {{i18n.t(item.pathTitle)}}
   Burger.burger(name='menu' :menuOpen='mobileMenuOpen' @click.native='mobileMenuOpen = !mobileMenuOpen')
   //- Login
-  //- .slot(v-if='hasSlot')
-  //-   slot
+  .slot(v-if='hasSlot')
+    slot
 </template>
 
 <script lang="ts">
@@ -68,7 +68,7 @@ export default defineComponent({
   },
   computed: {
     hasSlot () {
-      return !!this.$slots.default || !!this.$scopedSlots.default
+      return !!this.$slots.default
     }
   },
   watch: {

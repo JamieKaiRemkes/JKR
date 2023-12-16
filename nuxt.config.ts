@@ -62,6 +62,7 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/i18n',
+    '@nuxtjs/color-mode',
     'nuxt-svgo',
   //   // https://go.nuxtjs.dev/eslint
   //   '@nuxtjs/eslint-module',
@@ -90,34 +91,45 @@ export default defineNuxtConfig({
   //   },
   // },
 
-  // Configure i18n
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '-mode',
+    storageKey: 'nuxt-color-mode'
+  },
+
+  svgo: {
+    svgo: false
+  },
+
   i18n: {
     locales: [
       {
         code: "en",
         iso: "en-US",
+        name: "English"
       },
       {
         code: "nl",
         iso: "nl-NL",
+        name: "Nederlands"
       },
     ],
     defaultLocale: "en",
     strategy: "prefix",
-    seo: true,
     baseUrl: () => window.location.origin,
-    vueI18nLoader: true,
     detectBrowserLanguage: {
       useCookie: true,
       cookieCrossOrigin: false,
       cookieDomain: null,
       cookieKey: "locale",
       cookieSecure: false,
-      // Always redirect according to cookie
       alwaysRedirect: true,
       fallbackLocale: "en",
-      // Better for SEO
-      onlyOnRoot: true,
     },
     // To fix jumping pages on locale change
     skipSettingLocaleOnNavigate: true,

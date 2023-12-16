@@ -7,16 +7,15 @@ nl:
 
 <template lang="pug">
 .socials
-  Icon(v-if='shareButton && webShareEnabled' name='ui/share' @click.native='share')
+  Icon(v-if='shareButton && webShareEnabled' name='share' @click.native='share')
   a(:href='githubLink' target='new')
-    Icon(name='socials/github')
+    Icon(name='github')
   a(:href='linkedinLink' target='new')
-    Icon(name='socials/linkedin')
+    Icon(name='linkedin')
   .line
 </template>
 
 <script>
-import Icon from '~/components/Icon.vue'
 import { useI18n } from '#i18n';
 
 export default defineComponent({
@@ -28,9 +27,6 @@ export default defineComponent({
     return {
       i18n
     }
-  },
-  components: {
-    Icon
   },
   props: {
     shareButton: {

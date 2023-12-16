@@ -1,8 +1,10 @@
 <template lang="pug">
-component.icon(:is="is")
+component.icon(:is="icons[props.name]")
 </template>
 
 <script setup lang="ts">
+import { filename } from 'pathe/utils'
+
 const props = defineProps({
   name: {
     type: String,
@@ -10,11 +12,11 @@ const props = defineProps({
   }
 })
 
-const is = computed(() => {
-  const path = `../assets/icons/${props.name}.svg?component`;
+const glob = import.meta.glob('~/assets/icons/**/*.svg',  { eager: true })
 
-  return defineAsyncComponent(() => import(path))
-})
+const icons = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+)
 </script>
 
 <style lang="sass">
@@ -24,7 +26,10 @@ const is = computed(() => {
   flex-direction: column
   height: var(--icon-size)
   width: var(--icon-size)
-  color: var(--color-dark)
+  padding: 0
+  margin: 0
+  // color: var(--color-dark)
+  // fill: currentColor !important
   &.s
     height: calc(var(--icon-size) * 0.8)
     width: calc(var(--icon-size) * 0.8)
@@ -37,9 +42,4 @@ const is = computed(() => {
   &.overwritefill
     svg *
       fill: currentColor
-  svg
-    flex: 1 0
-    height: 100%
-    width: 100%
-    fill: currentColor !important
 </style>

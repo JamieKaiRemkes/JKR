@@ -1,40 +1,43 @@
-export const useLocalStore = defineStore('localStore', {
+const LOCAL_STORAGE_KEY = "settings";
+
+const defaultSettings = {
+  cookieConsent: false,
+};
+
+export const useLocalStore = defineStore("localStore", {
   state: () => ({
-    darkMode: false,
-    syncSystemDarkMode: false,
-    cookieConsent: false
+    settings: defaultSettings,
   }),
+  hydrate(state, initialState) {
+    const settings = localStorage.getItem(LOCAL_STORAGE_KEY);
+    state.settings = settings ? JSON.parse(settings) : initialState;
+  },
   getters: {
-    getDarkMode: (state) => {
-      // TODO: Fix window undefined
-      return state.syncSystemDarkMode ? window?.matchMedia && window?.matchMedia('(prefers-color-scheme: dark)').matches : state.darkMode
+    getSettings(state): typeof defaultSettings {
+      return this.settings;
     },
-    getSyncSystemDarkMode: (state) => {
-      return state.syncSystemDarkMode
+    getCookieConsent(state): boolean {
+      return this.getSettings.cookieConsent;
     },
-    getCookieConsent: (state) => {
-      return state.cookieConsent
-    }
   },
   actions: {
+    updateSettings(partialSettings: Partial<typeof defaultSettings>) {
+      this.settings = {
+        ...this.getSettings,
+        ...partialSettings,
+      };
+
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(this.settings));
+    },
     acceptCookies() {
-      this.cookieConsent = true
+      this.updateSettings({
+        cookieConsent: true,
+      });
     },
     disableCookies() {
-      this.cookieConsent = false
+      this.updateSettings({
+        cookieConsent: false,
+      });
     },
-    enableSyncSystemDarkMode() {
-      this.syncSystemDarkMode = true
-    },
-    disableSyncSystemDarkMode() {
-      this.syncSystemDarkMode = false
-    },
-    enableDarkMode() {
-      this.darkMode = true
-    },
-    disableDarkMode() {
-      this.darkMode = false
-    }
-  }
-})
-
+  },
+});
